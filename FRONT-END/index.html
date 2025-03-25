@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div id="lado_esquerdo"></div>  
+        <div id="lado_direito">
+            <form action="#" method="post">
+                <h1>Informe os dados de acesso</h1>
+                <p>Preencha os campos abaixo para acessar sua conta.</p>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Informe seu email" required>
+                
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Informe sua senha" required>
+                
+                <div class="manter-conectado">
+                    <input type="checkbox" id="manter_conectado" name="manter_conectado">
+                    <label for="manter_conectado">Manter conectado</label>
+                </div>
+                
+                <div id="botoes">
+                    <button type="submit" class="btn">Conectar-se</button>
+                    <a href="#" class="link">Esqueceu sua senha?</a> <br>
+                    <button type="submit" class="btn btn-criar">Criar nova conta</button>
+
+                </div>
+                
+            </form>
+        </div>  
+    </main>
+</body>
+</html>

@@ -1,0 +1,146 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+#lado_esquerdo, #lado_direito {
+    width: 50%;
+    min-height: 100vh;
+}
+
+#lado_esquerdo {
+    background-image: url(../images/img_login.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#lado_direito {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+}
+
+form {
+    width: 80%;
+    min-width: 400px;
+    height: 600px;
+    min-height: 500px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 700;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+label {
+    font-weight: 600;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5rem;
+    outline: none;
+    background-color: rgb(243, 243, 243);
+}
+
+input[type="checkbox"] {
+    width: auto; /* Define o tamanho padrão */
+    height: auto;
+    margin-right: 0.5rem; /* Espaço entre o checkbox e o label */
+    cursor: pointer;
+}
+
+
+.manter-conectado {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn {
+    width: 100%;
+    background-color:rgb(78, 78, 170);
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: rgb(53, 53, 105);
+}
+
+.link {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: rgb(78, 78, 170);
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+#botoes{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-criar {
+    width: 30%; /* Define a largura do botão */
+    background-color: #27602C; /* Cor diferente, verde por exemplo */
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-criar:hover {
+    background-color: #68996d ; /* Cor mais escura no hover */
+}
