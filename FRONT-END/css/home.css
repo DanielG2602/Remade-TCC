@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #fff8f0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 1rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #1f4e79;
+}
+
+.divider {
+    color: #aaa;
+    font-weight: bold;
+}
+
+.btn-user {
+    background-color: #1f4e79;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px); /* ajusta a altura total removendo o nav */
+}
+
+#containerHome {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#containerHome h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #1f4e79;
+}
+
+#infoPrincipal {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 600px; /* define uma altura fixa ou mais controlada */
+    background-color: #f8f9fa;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+#ladoEsquerdo,
+#ladoDireito {
+    width: 50%;
+    height: 100%;
+}
+
+#ladoEsquerdo {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#ladoEsquerdo p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.botoes {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-azul {
+    background-color: #1f4e79;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-azul:hover {
+    background-color: #163c5c;
+}
+
+#ladoDireito {
+    background-image: url(../images/ftCozinheiro.jpg);
+    background-size: cover;
+    background-position: center;
+}

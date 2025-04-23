@@ -110,3 +110,8 @@ form .botoes {
     background-color: #000000; 
     color: #fff; 
   }
+
+  a{
+    text-decoration: none;
+    color: #000000;
+  }
