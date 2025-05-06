@@ -13,12 +13,12 @@
     <main>
         <div id="lado_esquerdo"></div>  
         <div id="lado_direito">
-            <form action="#" method="post">
+            <form action="../../BECK-END/conexão.php" method="post">
                 <h1>Informe os dados de acesso</h1>
                 <p>Preencha os campos abaixo para acessar sua conta.</p>
                 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Informe seu email" required>
+                =<label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Informe seu Email" required>
                 
                 <label for="senha">Senha:</label>
                 <input type="password" id="senha" name="senha" placeholder="Informe sua senha" required>
@@ -28,7 +28,7 @@
                 </label>
                 
                   <div class="botoes">
-                    <button type="button" class="esqueceu-senha"><a href="../html/TelaCadastro.html">Esqueceu sua Senha?</a> </button>
+                    <button type="button" class="esqueceu-senha">Esqueceu sua Senha?</button>
                     <button type="submit" class="conectar">Conecta-se</button>
                   </div>
             </form>
