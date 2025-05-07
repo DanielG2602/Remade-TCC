@@ -1,3 +1,8 @@
+<?php
+include_once '../../BECK-END/ValidaLogin.php';
+include_once '../../BECK-END/registraLogin.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,7 +18,7 @@
     <main>
         <div id="lado_esquerdo"></div>  
         <div id="lado_direito">
-            <form action="../../BECK-END/conexão.php" method="post">
+            <form action="../../BECK-END/ValidaLogin.php" method="post">
                 <h1>Informe os dados de acesso</h1>
                 <p>Preencha os campos abaixo para acessar sua conta.</p>
                 

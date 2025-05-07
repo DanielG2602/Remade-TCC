@@ -1,9 +1,10 @@
 <?php
 session_start(); 
 
-$servername = "localhost";
+$servername = "RCBR7";//ou localhost
+$host = "localhost"; // Nome do host do banco de dados 
 $username = "root";
-$password = ""; 
+$password = "Matheusa.s08."; //senac
 $dbname = "acervorct";
 
 try {
@@ -13,7 +14,7 @@ try {
     die("Erro na conexão com o banco de dados: " . $e->getMessage());
 }
 
-// Verifica se o formulário foi enviado
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $senha = $_POST['senha'];
@@ -35,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                 if ($manter_conectado) {
-                    $token = bin2hex(random_bytes(32)); // Gera um token seguro
-                    $expiry = time() + (30 * 24 * 3600); // Validade de 30 dias
+                    $token = bin2hex(random_bytes(32)); 
+                    $expiry = time() + (30 * 24 * 3600); 
                     setcookie('lembrar_usuario', $token, $expiry, '/', '', true, true);
 
 
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt_token->execute();
                 }
 
-                header("Location: index.php");
+                header("Location: home.php");
                 exit();
             } else {
 
