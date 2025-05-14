@@ -1,6 +1,5 @@
 <?php
- 
- $servername = "RCBR7";//ou localhost
+
 $host = "localhost"; // Nome do host do banco de dados 
 $username = "root";
 $password = "Matheusa.s08."; //senac
@@ -49,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
 
-        $stmt_insert = $pdo->prepare("INSERT INTO rc_usuarios (email, senha) VALUES (:email, :senha)");
+        $stmt_insert = $pdo->prepare("INSERT INTO usuarios (email, senha) VALUES (:email, :senha)");
         $stmt_insert->bindParam(':idEmail', $email);
         $stmt_insert->bindParam(':idSenha', $senha_hash);
 

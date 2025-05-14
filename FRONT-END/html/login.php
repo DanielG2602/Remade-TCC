@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../../BACK-END/ValidaLogin.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ session_start();
     <main>
         <div id="lado_esquerdo"></div>  
         <div id="lado_direito">
-            <form action="../../BECK-END/ValidaLogin.php" method="post">
+            <form action="../../BACK-END/ValidaLogin.php" method="post">
                 <h1>Informe os dados de acesso</h1>
                 <p>Preencha os campos abaixo para acessar sua conta.</p>
                 
