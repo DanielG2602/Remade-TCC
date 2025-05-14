@@ -24,12 +24,13 @@
 
     <main>
         <h1>LISTAR CARGOS</h1>
-        <div class="search-container">
-            <input type="text" placeholder="FAÇA SUA PESQUISA">
-            <button>BUSCAR</button>
+        <div class="controls-container">
+            <div class="search-container">
+                <input type="text" placeholder="FAÇA SUA PESQUISA">
+                <button>BUSCAR</button>
+            </div>
+            <button class="add-button">ADICIONAR CARGO</button>
         </div>
-
-        <button class="add-button">ADICIONAR CARGO</button>
 
         <table>
             <thead>
@@ -70,7 +71,34 @@
                     <td>26/03/2050</td>
                     <td><button class="status-button active">SIM</button></td>
                 </tr>
-    
+                <tr>
+                    <td>COZINHEIRO</td>
+                    <td>Prepara a receita</td>
+                    <td>26/03/2016</td>
+                    <td>26/03/2039</td>
+                    <td><button class="status-button active">SIM</button></td>
+                </tr>
+                <tr>
+                    <td>COZINHEIRO</td>
+                    <td>Prepara a receita</td>
+                    <td>26/03/2016</td>
+                    <td>26/03/2039</td>
+                    <td><button class="status-button active">SIM</button></td>
+                </tr>
+                <tr>
+                    <td>EDITOR</td>
+                    <td>Escreve a receita</td>
+                    <td>26/03/2016</td>
+                    <td>26/03/2039</td>
+                    <td><button class="status-button active">SIM</button></td>
+                </tr>
+                <tr>
+                    <td>COZINHEIRO</td>
+                    <td>Prepara a receita</td>
+                    <td>26/03/2016</td>
+                    <td>26/03/2039</td>
+                    <td><button class="status-button inactive">NÃO</button></td>
+                </tr>
             </tbody>
         </table>
     </main>
