@@ -1,9 +1,6 @@
 <?php
 
-$host = "localhost"; // Nome do host do banco de dados 
-$username = "root";
-$password = "Matheusa.s08."; //senac
-$dbname = "acervorct";
+require_once 'conexao.php';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

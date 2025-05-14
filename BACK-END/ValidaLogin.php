@@ -1,6 +1,6 @@
 <?php
 
-include 'registraLogin.php';
+require_once 'conexao.php';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
@@ -56,8 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $erro = "Formato de email inválido.";
     }
-
-
+    
     if (isset($erro)) {
         echo "<p style='color:red;'>$erro</p>";
     }
