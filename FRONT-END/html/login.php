@@ -1,6 +1,5 @@
 <?php
-include_once '../../BECK-END/ValidaLogin.php';
-include_once '../../BECK-END/registraLogin.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
