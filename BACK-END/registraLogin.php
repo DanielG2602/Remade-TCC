@@ -1,67 +1,52 @@
 <?php
+// Valida se o método da requisição é POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtém os dados do formulário
+    $email = $_POST["email"];
+    $confirmar_email = $_POST["confirmar_email"];
+    $senha = $_POST["senha"];
+    $confirmar_senha = $_POST["confirmar_senha"];
 
-require_once 'conexao.php';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erro na conexão com o banco de dados: " . $e->getMessage());
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $confirmar_email = filter_input(INPUT_POST, 'confirmar_email', FILTER_SANITIZE_EMAIL);
-    $senha = $_POST['senha'];
-    $confirmar_senha = $_POST['confirmar_senha'];
-
-    $erros = [];
-
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erros[] = "O email é inválido.";
-    } elseif ($email !== $confirmar_email) {
-        $erros[] = "Os emails não coincidem.";
-    } else {
-        $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM usuarios WHERE email = :email");
-        $stmt_check->bindParam(':email', $email);
-        $stmt_check->execute();
-        if ($stmt_check->fetchColumn() > 0) {
-            $erros[] = "Este email já está cadastrado.";
-        }
+    // Validações dos dados
+    if (empty($email) || empty($confirmar_email) || empty($senha) || empty($confirmar_senha)) {
+        echo "<script>alert('Todos os campos são obrigatórios!'); window.location.href='cadastro.php';</script>";
+        exit;
     }
 
-    if (empty($senha)) {
-        $erros[] = "A senha é obrigatória.";
-    } elseif (strlen($senha) < 6) {
-        $erros[] = "A senha deve ter pelo menos 6 caracteres.";
+    if ($email != $confirmar_email) {
+        echo "<script>alert('Os emails não conferem!'); window.location.href='cadastro.php';</script>";
+        exit;
     }
 
-    if ($senha !== $confirmar_senha) {
-        $erros[] = "A senha e a confirmação de senha não coincidem.";
+    if ($senha != $confirmar_senha) {
+        echo "<script>alert('As senhas não conferem!'); window.location.href='cadastro.php';</script>";
+        exit;
     }
 
-    if (empty($erros)) {
+    // Criptografa a senha
+    $senha_criptografada = password_hash($senha, PASSWORD_DEFAULT);
 
-        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    // Inclui o arquivo de conexão com o banco de dados (certifique-se de que o caminho está correto)
+    include_once("./BACK-END/conexao.php");
 
+    try {
+        // Prepara a query para inserir o usuário no banco de dados
+        $stmt = $conn->prepare("INSERT INTO usuarios (email, senha) VALUES (:email, :senha)");
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':senha', $senha_criptografada);
+        $stmt->execute();
 
-        $stmt_insert = $pdo->prepare("INSERT INTO usuarios (email, senha) VALUES (:email, :senha)");
-        $stmt_insert->bindParam(':idEmail', $email);
-        $stmt_insert->bindParam(':idSenha', $senha_hash);
+        echo "<script>alert('Usuário cadastrado com sucesso!'); window.location.href='login.php';</script>"; // Redireciona para login
+        exit;
 
-        if ($stmt_insert->execute()) {
-            header("Location: login.php?registro_sucesso=1");
-            exit();
-        } else {
-            $erros[] = "Erro ao registrar o usuário.";
-        }
+    } catch (PDOException $e) {
+        echo "<script>alert('Erro ao cadastrar usuário: " . $e->getMessage() . "'); window.location.href='cadastro.php';</script>";
+        exit;
     }
 
-
-    if (!empty($erros)) {
-        foreach ($erros as $erro) {
-            echo "<p style='color:red;'>$erro</p>";
-        }
-    }
+} else {
+    // Se o acesso ao script for feito por outro método (ex: GET), redireciona para o formulário
+    header("Location: cadastro.php");
+    exit;
 }
 ?>
