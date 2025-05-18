@@ -11,9 +11,8 @@
         <nav>
             <ul>
                 <li><a href="#">Livros</a></li>
-                <li><a href="FormReceitas.php">Receitas</a></li>
+                <li><a href="#">Receitas</a></li>
                 <li><a href="#">Funcionários</a></li>
-                <li><a href="FormCargos.php">Cargos</a></li>
                 <li><a href="#">Chefes de Cozinha</a></li>
                 <li class="divider">|</li>
                 <li><a href="restaurantes.php">Restaurantes</a></li>

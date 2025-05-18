@@ -13,7 +13,7 @@
     <main>
         <div id="lado_esquerdo"></div>
         <div id="lado_direito">
-            <form action="../../BACK-END/registraLogin.php" method="post">
+            <form action="../../BACK-END/login/RegistraLogin.php" method="post">
                 <h1>Registra-se</h1>
                 <p>Será necessario fornecer as seguintes informações:</p>
 
