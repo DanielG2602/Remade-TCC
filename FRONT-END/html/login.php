@@ -1,8 +1,3 @@
-<?php
-session_start();
-require_once '../../BACK-END/ValidaLogin.php';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,28 +11,36 @@ require_once '../../BACK-END/ValidaLogin.php';
 </head>
 <body>
     <main>
-        <div id="lado_esquerdo"></div>  
+        <div id="lado_esquerdo"></div>
         <div id="lado_direito">
-            <form action="../../BACK-END/ValidaLogin.php" method="post">
+            <form action="verificar_usuario.php" method="post">
                 <h1>Informe os dados de acesso</h1>
                 <p>Preencha os campos abaixo para acessar sua conta.</p>
-                
-                =<label for="email">Email:</label>
+
+                <?php
+                session_start(); 
+                if (isset($_SESSION['erro_login'])) {
+                    echo '<div class="erro">' . $_SESSION['erro_login'] . '</div>';
+                    unset($_SESSION['erro_login']); 
+                }
+                ?>
+
+                <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Informe seu Email" required>
-                
+
                 <label for="senha">Senha:</label>
                 <input type="password" id="senha" name="senha" placeholder="Informe sua senha" required>
-                
+
                 <label>
                     <input type="checkbox" name="manter_conectado"> Manter Conectado
                 </label>
-                
-                  <div class="botoes">
+
+                <div class="botoes">
                     <button type="button" class="esqueceu-senha">Esqueceu sua Senha?</button>
                     <button type="submit" class="conectar">Conecta-se</button>
-                  </div>
+                </div>
             </form>
-        </div>  
+        </div>
     </main>
 </body>
 </html>
