@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Livros</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="navbar">
+    <button>LIVROS</button>
+    <button>RECEITAS</button>
+    <button>FUNCIONARIOS</button>
+    <button>CHEFES DE COZINHAS</button>
+    <div class="dropdown">
+      <button>RESTAURANTES ▼</button>
+    </div>
+    <button class="usuario">USUÁRIO</button>
+  </header>
+
+  <main class="main-content">
+    <h1>LIVROS:</h1>
+    <p>Todos os livros Registrados no sistema</p>
+
+    <div class="card-container">
+      <div class="card">
+        <div class="image-placeholder"></div>
+        <div class="card-content">
+          <h2>Nome do Livro</h2>
+          <p>Descrição</p>
+          <a href="#">Avaliar →</a>
+        </div>
+      </div>
+
+      <!-- Duplique os cards -->
+      <div class="card">
+        <div class="image-placeholder"></div>
+        <div class="card-content">
+          <h2>Nome do livro</h2>
+          <p>Descrição</p>
+          <a href="#">Avaliar →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="image-placeholder"></div>
+        <div class="card-content">
+          <h2>Nome do Livro</h2>
+          <p>Descrição</p>
+          <a href="#">Avaliar →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+    </div>
+  </main>
+  <script src="script.js"></script>
+
+</body>
+</html>
