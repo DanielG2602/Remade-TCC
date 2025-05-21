@@ -6,24 +6,23 @@
     <title>Cadastro de Cargos</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="../../BACK-END/cargos.php" method="POST">
         <h1>Cadastro de Cargos</h1>
 
         <label for="NomeCargo">Nome do Cargo</label>
-        <input type="text">
+        <input type="text" name="NomeCargo" >
 
         <label for="DescCargo">Descrição do Cargo</label>
-        <input type="text">
+        <input type="text" name ="DescCargo">
 
         <label for="DataAdmissao">Data de admissao do Cargo</label>
-        <input type="date">
+        <input type="date" name="DataAdmissao">
 
         <label for="StatusCargo">Status do Cargo</label>
-        <select name="Status" id="">
+        <select name="Status" id="" name="Status">
             <option value="Ativo">Ativo</option>
             <option value="Desativado">Desativado</option>
         </select>
-
         <input type="submit" value="Criar">
 
     </form>

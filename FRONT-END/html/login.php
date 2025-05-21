@@ -13,7 +13,7 @@
     <main>
         <div id="lado_esquerdo"></div>
         <div id="lado_direito">
-            <form action="verificar_usuario.php" method="post">
+            <form action="VerificaUsuario.php" method="post">
                 <h1>Informe os dados de acesso</h1>
                 <p>Preencha os campos abaixo para acessar sua conta.</p>
 

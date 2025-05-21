@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include_once '../conexão/conexão.php';
+include './conexão.php';
 
 function verificarCredenciais($email, $senha) {
     try {
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($email) || empty($senha)) {
         $_SESSION['erro_login'] = "Por favor, preencha todos os campos.";
-        header("Location: login.php");
+        header("Location: ../../FRONT-END/html/login.php");
         exit();
     }
 
@@ -51,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else {
         $_SESSION['erro_login'] = "Email ou senha incorretos.";
-        header("Location: login.php");
+        header("Location: ../../FRONT-END/html/login.php");
         exit();
     }
 } else {
-    header("Location: login.php");
+    header("Location: ../../FRONT-END/html/login.php");
     exit();
 }
 
