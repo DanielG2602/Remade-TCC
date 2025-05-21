@@ -30,9 +30,10 @@ USE `AcervoRct` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Cargo` (
   `idCargo` INT NOT NULL COMMENT 'Contém o atributo identificador do cargo.',
+  -- colocar nome*
   `descricao` CHAR(15) NOT NULL,
-  `data_inicio` DATE NOT NULL,
-  `data_fim` DATE NULL,
+  `data_inicio` DATE NOT NULL, 
+  `data_fim` DATE NULL,--tirar 
   `ind_ativo` TINYINT NOT NULL COMMENT 'Contém o status do cargo.\nex:\nNome       Status\n\nJoao        Ativo\nmaria       Inativo ',
   PRIMARY KEY (`idCargo`))
 ENGINE = InnoDB;
@@ -43,13 +44,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Funcionario` (
   `idFuncionario` INT NOT NULL AUTO_INCREMENT COMMENT 'Atributo identificador do funcionário',
-  `rg` INT NOT NULL COMMENT 'Contém o registro geral do funcionário (Número  da identidade)',
   `nome` VARCHAR(100) NOT NULL COMMENT 'Nome do funcionário.\n\nExemplo:\nNome\nJosé',
+  `rg` INT NOT NULL COMMENT 'Contém o registro geral do funcionário (Número  da identidade)',
   `dt_admissao` DATE NOT NULL COMMENT 'Data em que o fucionário foi admitido\nex:\n13/08/2024',
   `salario` DECIMAL(9,2) NOT NULL COMMENT 'Contém o salário do funcionário',
   `nome_fantasia` VARCHAR(45) NULL,
   `foto_func` BLOB NULL,
   `Cargo_idCargo` INT NOT NULL,
+  --colocar se o funcionario esta ativo ou não
   PRIMARY KEY (`idFuncionario`),
   INDEX `fk_Funcionario_Cargo1_idx` (`Cargo_idCargo` ASC) VISIBLE,
   CONSTRAINT `fk_Funcionario_Cargo1`
@@ -64,8 +66,8 @@ ENGINE = InnoDB;
 -- Table `AcervoRct`.`Receita`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Receita` (
-  `nome_rct` VARCHAR(50) NOT NULL COMMENT 'Nome da receita\nEx: \nBolo de Cenoura',
   `idReceita` INT NOT NULL AUTO_INCREMENT COMMENT 'Contém o identificador único da receita',
+  `nome_rct` VARCHAR(50) NOT NULL COMMENT 'Nome da receita\nEx: \nBolo de Cenoura',
   `dt_criacao` DATE NOT NULL COMMENT 'Data da criação da receita por um cozinheiro.',
   `cozinheiro` INT NOT NULL,
   `preparo` VARCHAR(5000) NOT NULL COMMENT 'Contém o modo de preparo\nEx:\nModo de preparo: Separe 3 gemas numa vasilha e bata a clara[...]',
@@ -129,9 +131,9 @@ ENGINE = InnoDB;
 -- Table `AcervoRct`.`Receita_e_Ingrediente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Receita_e_Ingrediente` (
+  `FKidIngrediente` INT NULL,
   `FKnome_rct` VARCHAR(50) NULL COMMENT 'Nome da receita\nEx: \nBolo de Cenoura',
   `FKcozinheiro` INT NULL,
-  `FKidIngrediente` INT NULL,
   `quant_ingrediente` DECIMAL(5,1) NOT NULL,
   `RC_Parametro_idmes` SMALLINT NULL,
   `RC_Parametro_idano` SMALLINT NULL,
@@ -171,6 +173,7 @@ CREATE TABLE IF NOT EXISTS `AcervoRct`.`Restaurante` (
   `idRestaurante` SMALLINT NOT NULL COMMENT 'Contém o atribito identifiador do restaurante do cozinheiro.\nEx:\nidrestaurante   nome\n  001                Rota 001',
   `nome` VARCHAR(45) NOT NULL COMMENT 'Contém o nome do restaurante\nEx:\nidresteurante   nome\n  001                Rota 001',
   `contato` VARCHAR(45) NOT NULL COMMENT 'Contém o contato do restaurante',
+  --Faltando endereço;
   `telefone` CHAR(15) NOT NULL COMMENT 'Contém o telefone do contato no restaurante referência.',
   PRIMARY KEY (`idRestaurante`))
 ENGINE = InnoDB;
@@ -180,6 +183,7 @@ ENGINE = InnoDB;
 -- Table `AcervoRct`.`Referencia`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Referencia` (
+  --idReferencia
   `FKcozinheiro` INT NOT NULL,
   `FKRestaurante` SMALLINT NOT NULL,
   `data_inicio` DATE NOT NULL COMMENT 'Contém a data de início do contrato do funcionário.',
@@ -231,8 +235,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Livro` (
   `idLivro` SMALLINT NOT NULL COMMENT 'Contém o indentificador do livro.\nex:\n\nidLivro    Titulo                    ISBN\n0001      A bela e a fera     978-9-85417-00-9',
-  `FKeditor` INT NOT NULL,
   `titulo` VARCHAR(45) NOT NULL COMMENT 'Contém o título do livro.\nex:\n\nidLivro    titulo                    ISBN\n0001      A bela e a fera     978-9-85417-00-9',
+  `FKeditor` INT NOT NULL,
+  --autor do livro
   `isbn` CHAR(20) NULL COMMENT 'Código de 13 digitos que identifica o autor, título, país, edtora e a edição da obra.\nex:\n\nidLivro    Titulo                    ISBN\n0001      A bela e a fera     978-9-85417-00-9',
   PRIMARY KEY (`idLivro`),
   UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC) VISIBLE,
@@ -250,6 +255,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Publicacao` (
   `FKLivro` SMALLINT NULL,
+  --Data de quando foi publicado
   `FKnome_rct` VARCHAR(50) NOT NULL,
   `FKcozinheiro` INT NOT NULL,
   PRIMARY KEY (`FKLivro`, `FKnome_rct`, `FKcozinheiro`),
@@ -273,6 +279,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Usuario` (
   `idusuario` INT NOT NULL AUTO_INCREMENT,
+  --Nome do usuario;
+  --Cargo/tipo de permissao do usuario;
   `Email` VARCHAR(60) NOT NULL COMMENT 'contem o email para ser registrado no sistema, permitindo o login ',
   `Senha` VARCHAR(20) NOT NULL COMMENT 'caso a senha seja correta com o email inserido, o login sera permitido',
   `JWSL_Funcionario_idFuncionario` INT NOT NULL,
