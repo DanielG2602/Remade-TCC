@@ -1,6 +1,6 @@
 <?php 
 
-include_once'conexão.php';
+include_once'./conexão.php';
 
 $nomeChefe = $_POST['nomeChefe'];
 $nomeRestaurante = $_POST['nomeRestaurante'];
@@ -13,7 +13,7 @@ $obsReceita = $_POST['obsReceita'];
 try{
     $pdo = conn();
     // TODO ajustar o insert na tabela de receitas
-    $sql = "INSERT INTO RC_Receita (nome_rct, idReceita, dt_criacao, cozinheiro, preparo, quantidade_porcao, ind_rec_inedita) 
+    $sql = "INSERT INTO Receita (nome_rct, idReceita, dt_criacao, cozinheiro, preparo, quantidade_porcao, ind_rec_inedita) 
             VALUES (:nome_rct, :email, :idade)";
             
     $stmt = $pdo->prepare($sql);
