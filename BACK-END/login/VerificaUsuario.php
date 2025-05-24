@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($usuario) {
         $_SESSION['id_usuario'] = $usuario['idUsuario'];
         $_SESSION['nome_usuario'] = $usuario['nomeUsuario'];
-        header("Location: painel.php");
+        header("Location: ../../FRONT-END/html/home.php");
         exit();
     } else {
         $_SESSION['erro_login'] = "Email ou senha incorretos.";

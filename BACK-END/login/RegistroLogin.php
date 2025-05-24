@@ -35,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             // Preparar a consulta SQL para inserir dados na tabela usuario
-            $stmt = $conexao->prepare("INSERT INTO Usuario (Email, Senha) VALUES (:email, :senha)");
+            $stmt = $conexao->prepare("INSERT INTO usuario (Email, Senha) VALUES (:email, :senha)");
 
             // Vincular os parâmetros
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':senha', $senha_criptografada);
+            $stmt->bindParam(':email', 'test01@example.com');
+            $stmt->bindParam(':senha', 'test123');
 
             // Executar a consulta
             if ($stmt->execute()) {
