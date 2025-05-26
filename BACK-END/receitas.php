@@ -1,27 +1,28 @@
 <?php 
 
-include_once'./conexão.php';
+include_once'./conexao.php';
 
-$nomeChefe = $_POST['nomeChefe'];
-$nomeRestaurante = $_POST['nomeRestaurante'];
-$nomeLivro = $_POST['nomeLivro'];
+$nomeReceita = $_POST['nomeReceita'];
 $dataCriacao = $_POST['dataCriacao'];
-$Integredientes = $_POST['Integredientes'];
+$nomeChefe = $_POST['nomeChefe'];
 $metodoPreparo = $_POST['metodoPreparo'];
-$obsReceita = $_POST['obsReceita'];
+$qtd_porcao = $_POST['qtdPorcao'];
+$ind_rec = $_POST['ind_rec_inedita'];
 
 try{
     $pdo = conn();
-    // TODO ajustar o insert na tabela de receitas
-    $sql = "INSERT INTO Receita (nome_rct, idReceita, dt_criacao, cozinheiro, preparo, quantidade_porcao, ind_rec_inedita) 
-            VALUES (:nome_rct, :email, :idade)";
+    $sql = "INSERT INTO receita (nome_rct, dt_criacao, cozinheiro, preparo, quantidade_porcao, ind_rec_inedita) 
+            VALUES (:nome_rct, :dt_criacao, :cozinheiro, :preparo, :quantidade_porcao, :ind_rec_inedita)";
             
     $stmt = $pdo->prepare($sql);
 
-    // Definir os valores e executar
     $stmt->execute([
-        // TODO
-        ':nome_rct' => $nomeChefe,
+        ':nome_rct' => $nomeReceita,
+        ':dt_criacao' => $dataCriacao,
+        ':cozinheiro' => $nomeChefe,
+        ':preparo' => $metodoPreparo,
+        ':quantidade_porcao' => $qtd_porcao,
+        ':ind_rec_inedita' => $ind_rec,
     ]);
 
 }catch(PDOException $e){

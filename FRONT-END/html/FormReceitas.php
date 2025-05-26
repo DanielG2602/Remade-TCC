@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Receita</title>
 </head>
+
 <body>
-    <form action="" method="post">
+    <form action="../../BACK-END/receitas.php" method="post">
 
         <h1>Cadastro de Receitas</h1>
 
-        <label for="nomeChefe">Nome do Chefe</label>
-        <input type="text" required>
-
-        <label for="nomeRestaurante">Restaurante</label>
-        <input type="text" required>
-
-        <label for="nomeLivro">Nome do livro</label>
-        <input type="text" required>
+        <label for="nomeReceita">Nome da Receita</label>
+        <input type="text" name="nomeReceita" required>
 
         <label for="dataCriacao">Informe a Data de Criação da Receita</label>
-        <input type="date" required>
+        <input type="date" name="dataCriacao" required>
 
-        <label for="Integredientes">Integredientes</label>
-        <input type="text" required>
+        <label for="nomeChefe">Nome do Chefe</label>
+        <input type="text" name="nomeChefe" required>
 
         <label for="metodoPreparo">Metodo de preparo</label>
-        <input type="text" required>
+        <input type="text" name="metodoPreparo" required>
 
-        <label for="obsReceita">Receita</label>
-        <textarea name="obsReceita" id=""></textarea>
+        <label for="qtdPorcao">Quantidade de Porção</label>
+        <input type="text" name="qtdPorcao" required>
 
-        <button>Prev</button>
+        <label for="ind_rec_inedita">Indicador de receita inédita</label>
+        <input type="text" name="ind_rec_inedita" required>
+
         <input type="submit" value="Next">
 
     </form>
 </body>
+
 </html>
