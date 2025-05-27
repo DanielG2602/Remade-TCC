@@ -26,21 +26,18 @@ CREATE SCHEMA IF NOT EXISTS `AcervoRct` ;
 USE `AcervoRct` ;
 
 -- -----------------------------------------------------
--- Table `AcervoRct`.`Cargo`
+-- Table `AcervoRct`.`Cargo`cargo
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Cargo` (
-  `idCargo` INT NOT NULL COMMENT 'Contém o atributo identificador do cargo.',
-  -- colocar nome*
+  `idCargo` INT NOT NULL AUTO_INCREMENT COMMENT 'Contém o atributo identificador do cargo.',
+  `nomeCargo` CHAR(30) NOT NULL,
   `descricao` CHAR(15) NOT NULL,
-  `data_inicio` DATE NOT NULL, 
-  `data_fim` DATE NULL, 
-  `ind_ativo` TINYINT NOT NULL COMMENT 'Contém o status do cargo.\nex:\nNome       Status\n\nJoao        Ativo\nmaria       Inativo ',
+  `ind_ativo` TINYINT NOT NULL COMMENT 'Contém o status do cargo.ex:Nome       Status:Joao        Ativo:maria       Inativo ',
   PRIMARY KEY (`idCargo`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `AcervoRct`.`Funcionario`
+-- Table `AcervoRct`.`Funcionario`receitareceitareceitareceita
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Funcionario` (
   `idFuncionario` INT NOT NULL AUTO_INCREMENT COMMENT 'Atributo identificador do funcionário',
@@ -315,3 +312,4 @@ CREATE TABLE IF NOT EXISTS `AcervoRct`.`Usuario` (
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

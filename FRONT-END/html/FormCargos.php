@@ -15,9 +15,6 @@
         <label for="DescCargo">Descrição do Cargo</label>
         <input type="text" name ="DescCargo">
 
-        <label for="DataAdmissao">Data de admissao do Cargo</label>
-        <input type="date" name="DataAdmissao">
-
         <label for="StatusCargo">Status do Cargo</label>
         <select name="Status" id="" name="Status">
             <option value="Ativo">Ativo</option>
