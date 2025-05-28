@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <form action="../../BACK-END/receitas.php" method="post">
+    <form action="../../BACK-END/receitas.php" method="get">
 
         <h1>Cadastro de Receitas</h1>
 

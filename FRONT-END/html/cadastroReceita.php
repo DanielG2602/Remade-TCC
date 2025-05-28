@@ -22,7 +22,7 @@
     </header>
 
     <main>
-        <form action="">
+        <form action="../../BACK-END/receitas.php" method="get">
             <h2>Cadastrar Receita</h2>
             <label for="nome_chefe">Nome do Chefe:</label>
             <input type="text" id="nome_chefe" name="nome_chefe" placeholder="Digite o nome do chefe" required>
