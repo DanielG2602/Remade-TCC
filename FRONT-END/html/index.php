@@ -1,10 +1,23 @@
+<?php
+
+session_start(); 
+
+if (!isset($_SESSION['usuario_id'])) {
+
+    $_SESSION['erro_login'] = "Você precisa estar logado para acessar esta página.";
+    header('Location: FormLogin.php'); // FormLogin.php está na mesma pasta 'html'
+    exit();
+}
+
+
+$usuario_email = $_SESSION['usuario_email'] ?? 'Usuário'; 
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css">
-    <title>Home | Sistema RCBR</title>
+    <link rel="stylesheet" href="../css/home.css"> <title>Home | Sistema RCBR</title>
 </head>
 <body>
     <header>
@@ -15,15 +28,20 @@
                 <li><a href="#">Funcionários</a></li>
                 <li><a href="#">Chefes de Cozinha</a></li>
                 <li class="divider">|</li>
-                <li><a href="restaurantes.php">Restaurantes</a></li>
-                <li><button class="btn-user">USUÁRIO</button></li>
+                <li><a href="ListaRestaurantes.php">Restaurantes</a></li> <li>
+                    <button class="btn-user">
+                        <?php echo htmlspecialchars($usuario_email); ?> </button>
+                    <form action="../../logout.php" method="POST" style="display:inline;">
+                        <button type="submit" class="btn-user" style="margin-left: 10px;">Sair</button>
+                    </form>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="containerHome">
-            <h1>BEM VINDO AO SISTEMA RCBR</h1>
+            <h1>BEM VINDO AO SISTEMA RCBR, <?php echo htmlspecialchars($usuario_email); ?>!</h1>
             <div id="infoPrincipal">
                 <div id="ladoEsquerdo">
                     <p>
