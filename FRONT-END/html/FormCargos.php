@@ -39,7 +39,7 @@
       </select>
 
       <div class="botoes">
-        <button type="button" class="cancelar">Cancelar</button>
+        <button type="button" class="cancelar"><a href="./index.php">cancelar</a></button>
         <button type="submit" class="confirmar">Criar</button>
       </div>
     </form>

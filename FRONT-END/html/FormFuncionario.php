@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="PT-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Funcionarios</title>
 </head>
+
 <body>
     <form action="../../BACK-END/funcionario.php" method="POST">
         <h1>Cadastro de Funcionarios</h1>
@@ -25,9 +27,33 @@
         <input type="text" name="nome_fantasia" required>
 
         <label for="cargo_idCargo">Id do Cargo</label>
-        <input type="number" name="cargo_idCargo" required>
+        <?php
+
+        include_once'../../BACK-END/conexao.php';
+
+        $conn = conn(); 
+        
+        $sql = "SELECT idCargo, nomeCargo FROM Cargo";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+        <select name="cargo_idCargo">
+            <?php
+            if ($resultados) {
+                foreach ($resultados as $row) {
+                    echo "<option value='" . htmlspecialchars($row["idCargo"]) . "'>" . htmlspecialchars($row["nomeCargo"]) . "</option>";
+                }
+            } else {
+                echo "<option>Nenhum resultado encontrado</option>";
+            }
+            ?>
+        </select>
 
         <input type="submit" value="Enviar">
     </form>
 </body>
+
 </html>
