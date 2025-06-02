@@ -10,12 +10,11 @@
   <header>
     <nav>
       <ul>
-        <li><a href="#">Livros</a></li>
-        <li><a href="#">Receitas</a></li>
-        <li><a href="#">Funcionários</a></li>
-        <li><a href="#">Chefes de Cozinha</a></li>
+        <li><a href="telaLivros.php">Livros</a></li>
+        <li><a href="FormReceitas.php">Receitas</a></li>
+        <li><a href="FormFuncionario.php">Funcionários</a></li>
         <li class="divider">|</li>
-        <li><a href="restaurantes.php">Restaurantes</a></li>
+        <li><a href="ListarRestaurante.php">Restaurantes</a></li>
         <li><button class="btn-user">USUÁRIO</button></li>
       </ul>
     </nav>
@@ -30,6 +29,10 @@
 
       <label for="DescCargo">Descrição do Cargo:</label>
       <input type="text" name="DescCargo" id="DescCargo" placeholder="Descreva o cargo" required />
+
+      <label for="data_inicio">Data:</label>
+      <input type="date" id="data_inicio" name="data_inicio" 
+             value="" min="01-01-1980" max="01-01-2050" required>
 
       <label for="StatusCargo">Status do Cargo:</label>
       <select name="Status" id="StatusCargo" required>

@@ -2,10 +2,10 @@
 function conn()
 {
     $host = "localhost"; 
-    $port = "3307"; // Porta do banco de dados (padrão é 3306 OU 3307)
+    $port = "3306"; // Porta do banco de dados (padrão é 3306 OU 3307)
     $dbname = "Acervorct"; 
     $usuario = "root"; 
-    $senha = ""; // CASO SEJA O PC DA FACUL SERA SENAC
+    $senha = "senac;"; // CASO SEJA O PC DA FACUL SERA SENAC
 
     try {
         $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
