@@ -1,3 +1,20 @@
+<?php
+// Incluir arquivo de conexão
+include_once '../../BACK-END/conexao.php'; // Certifique-se de que este arquivo contém a função de conexão
+
+// Criar a conexão
+
+$conn = conn(); // Chama a função que retorna o objeto PDO
+
+// Preparar e executar a consulta
+$sql = "SELECT idCargo, nomeCargo, descricao, ind_ativo FROM Cargo";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
+// Buscar resultados
+$cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -35,73 +52,29 @@
         </div>
 
         <table>
-            <thead>
-                <tr>
-                    <th>CARGO</th>
-                    <th>DESCRIÇÃO</th>
-                    <th>DATA DA ADMISSÃO</th>
-                    <th>DATA DO FIM</th>
-                    <th>ATIVO?</th>
-                </tr>
-            </thead>
             <tbody>
-                <tr>
-                    <td>DEGUSTADOR</td>
-                    <td>Degusta a receita</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2026</td>
-                    <td><button class="status-button active">SIM</button></td>
-                </tr>
-                <tr>
-                    <td>EDITOR</td>
-                    <td>Escreve a receita</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2024</td>
-                    <td><button class="status-button inactive">NÃO</button></td>
-                </tr>
-                <tr>
-                    <td>COZINHEIRO</td>
-                    <td>Prepara a receita</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2039</td>
-                    <td><button class="status-button inactive">NÃO</button></td>
-                </tr>
-                <tr>
-                    <td>GERENTE</td>
-                    <td>Organiza o restaurante</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2050</td>
-                    <td><button class="status-button active">SIM</button></td>
-                </tr>
-                <tr>
-                    <td>COZINHEIRO</td>
-                    <td>Prepara a receita</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2039</td>
-                    <td><button class="status-button active">SIM</button></td>
-                </tr>
-                <tr>
-                    <td>COZINHEIRO</td>
-                    <td>Prepara a receita</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2039</td>
-                    <td><button class="status-button active">SIM</button></td>
-                </tr>
-                <tr>
-                    <td>EDITOR</td>
-                    <td>Escreve a receita</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2039</td>
-                    <td><button class="status-button active">SIM</button></td>
-                </tr>
-                <tr>
-                    <td>COZINHEIRO</td>
-                    <td>Prepara a receita</td>
-                    <td>26/03/2016</td>
-                    <td>26/03/2039</td>
-                    <td><button class="status-button inactive">NÃO</button></td>
-                </tr>
+                <?php
+                if ($cargos) {
+                    foreach ($cargos as $cargo) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($cargo["idCargo"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($cargo["nomeCargo"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($cargo["descricao"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($cargo["ind_ativo"]) . "</td>";
+                        echo "<td>
+                <form method='POST' action='../../BACK-END/excluirCargo.php'>
+                    <input type='hidden' name='idCargo' value='" . htmlspecialchars($cargo["idCargo"]) . "'>
+                    <button type='submit'>Excluir</button>
+                </form>
+              </td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>Nenhum cargo encontrado</td></tr>";
+                }
+                ?>
             </tbody>
+
         </table>
     </main>
 </body>
