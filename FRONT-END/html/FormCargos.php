@@ -42,8 +42,8 @@
       </select>
 
       <div class="botoes">
-        <button type="button" class="cancelar"><a href="./index.php">cancelar</a></button>
-        <button type="submit" class="confirmar">Criar</button>
+        <button type="button" class="cancelar"><a href="FormCargos.php">cancelar</a></button>
+        <button type="submit" class="confirmar">Criar</a></button>
       </div>
     </form>
   </main>
