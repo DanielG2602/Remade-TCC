@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Cargos</title>
     <link rel="stylesheet" href="../css/GerenciarCargos.css">
+    <style></style>
 </head>
 <body>
     <header>
@@ -23,70 +24,94 @@
         <h1>Cargos Cadastrados</h1>
 
         <?php
-        // Inclui o arquivo de conexão com o banco de dados
-        // Verifique o caminho. Se conexao.php estiver em ../BACK-END, ajuste para './BACK-END/conexao.php' ou o caminho correto
-        include_once '../../BACK-END/conexao.php'; // Ajuste este caminho conforme a localização real do seu conexao.php
+        include_once '../../BACK-END/conexao.php'; 
 
-        // Inicia a conexão PDO
+        $search_term = '';
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search_term = htmlspecialchars($_GET['search']);
+        }
+
         try {
-            $pdo = conn(); // Assume que a função conn() está definida em conexao.php e retorna um objeto PDO
+            $pdo = conn();
 
-            // Prepara a query SQL para selecionar todos os cargos
-            // Certifique-se de que os nomes das colunas ('nomeCargo', 'DescCargo', 'data_inicio', 'ind_ativo')
-            // correspondem exatamente aos nomes no seu banco de dados
-            $sql = "SELECT nomeCargo, DescCargo, data_inicio, ind_ativo FROM cargo ORDER BY nomeCargo ASC";
-            $stmt = $pdo->query($sql); // Ou $stmt = $pdo->prepare($sql); $stmt->execute(); para queries mais complexas
+            $sql = "SELECT idCargo, nomeCargo, DescCargo, data_inicio, ind_ativo FROM cargo";
+            
+            if (!empty($search_term)) {
+                $sql .= " WHERE nomeCargo LIKE :search_term OR DescCargo LIKE :search_term";
+            }
+            $sql .= " ORDER BY nomeCargo ASC";
 
-            // Pega todos os resultados
+            $stmt = $pdo->prepare($sql); 
+
+            if (!empty($search_term)) {
+                $stmt->bindValue(':search_term', '%' . $search_term . '%', PDO::PARAM_STR);
+            }
+            
+            $stmt->execute();
             $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         } catch (PDOException $e) {
             echo '<p style="color: red; font-weight: bold;">Erro ao carregar os cargos: ' . $e->getMessage() . '</p>';
-            $cargos = []; // Garante que $cargos seja um array vazio em caso de erro para evitar erros de loop
+            $cargos = []; 
         }
         ?>
+
+        <?php if (isset($_GET['status']) && isset($_GET['msg'])): ?>
+            <p class="status-message <?php echo htmlspecialchars($_GET['status']); ?>">
+                <?php echo htmlspecialchars(urldecode($_GET['msg'])); ?>
+            </p>
+        <?php endif; ?>
+
+        <a href="FormCargos.php" class="add-new-cargo">Adicionar Novo Cargo</a>
+
+        <div class="search-container">
+            <form action="gerenciarCargos.php" method="GET">
+                <input type="text" name="search" placeholder="Pesquisar cargo ou descrição..." value="<?php echo $search_term; ?>">
+                <button type="submit">Pesquisar</button>
+            </form>
+        </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>ID</th> <th>Nome Cargo</th> 
+                    <th>Nome Cargo</th>
                     <th>Descrição</th>
                     <th>Data Início</th> 
                     <th>Ativo?</th> 
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 if (!empty($cargos)) {
-                    // Itera sobre cada cargo retornado do banco de dados
                     foreach ($cargos as $cargo) {
                         echo '<tr>';
                         echo '<td>' . htmlspecialchars($cargo['nomeCargo']) . '</td>';
                         echo '<td>' . htmlspecialchars($cargo['DescCargo']) . '</td>';
                         echo '<td>' . htmlspecialchars(date('d M Y', strtotime($cargo['data_inicio']))) . '</td>';
                         
-                        // Assumindo que 'data_fim' não existe no seu banco ou sempre é 1 Jan 1990 por padrão
-                        // Se você tiver uma coluna data_fim, use $cargo['data_fim']
-                        echo '<td>1 Jan 1990</td>'; // Placeholder. Adapte conforme seu banco de dados
-
-                        // Converte o valor de 0 ou 1 para "SIM" ou "NÃO" para o botão
                         $status_texto = ($cargo['ind_ativo'] == 1) ? 'SIM' : 'NÃO';
-                        $status_class = ($cargo['ind_ativo'] == 1) ? 'ativo-btn' : 'desativado-btn'; // Opcional: Adicione outra classe para estilizar NÃO
+                        $status_class = ($cargo['ind_ativo'] == 1) ? 'ativo-btn' : 'desativado-btn'; 
 
                         echo '<td><button class="' . $status_class . '">' . $status_texto . '</button></td>';
                         echo '<td>';
-                        // Os links para edição e exclusão precisariam do ID do cargo
-                       
-                        echo '<a href="FormCargos.php"><img src="maismaismais.png" alt="Adicionar"></a>'; // Link para adicionar novo
+                        
+                        echo '<a href="FormCargos.php?id=' . htmlspecialchars($cargo['idCargo']) . '" class="action-button edit-btn">Editar</a>';
+                        
+                  
+                        echo '<a href="../../BACK-END/excluir_cargo.php?id=' . htmlspecialchars($cargo['idCargo']) . '" class="action-button delete-btn" onclick="return confirm(\'Tem certeza que deseja excluir o cargo: ' . htmlspecialchars($cargo['nomeCargo']) . '?\');">Excluir</a>';
+
                         echo '</td>';
                         echo '</tr>';
                     }
                 } else {
-                    echo '<tr><td colspan="7">Nenhum cargo cadastrado ainda.</td></tr>';
+                    echo '<tr><td colspan="5">Nenhum cargo cadastrado ainda.</td></tr>'; 
                 }
                 ?>
             </tbody>
         </table>
     </main>
+</body>
+</html>
 </body>
 </html>
