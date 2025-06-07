@@ -1,3 +1,4 @@
+/* Regras globais (reset e fontes) */
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +18,7 @@ body {
     flex-direction: column;
 }
 
+/* Estilos do cabeçalho */
 header {
     background-color: #fff8f0;
     border-bottom: 1px solid #e0e0e0;
@@ -56,10 +58,96 @@ nav ul li a:hover {
     font-weight: 500;
 }
 
+/* Estilos da área de conteúdo principal (main) */
 main {
-    flex: 1;
+    flex: 1; /* Permite que o main ocupe o espaço restante verticalmente */
     display: flex;
-    flex-direction: column;
-    height: calc(100vh - 80px); /* ajusta a altura total removendo o nav */
+    flex-direction: column; /* Conteúdo interno do main organizado em coluna */
+    height: calc(100vh - 80px); /* Ajusta a altura total removendo o cabeçalho (assumindo 80px de altura para o cabeçalho) */
+
+    /* Estilos para centralizar o container da home */
+    align-items: center; /* Centraliza o conteúdo horizontalmente no main */
+    justify-content: center; /* Centraliza o conteúdo verticalmente no main */
+    padding: 2rem; /* Adiciona preenchimento ao redor do container principal */
 }
 
+/* Estilos do container principal da home */
+#containerHome {
+    background-color: #ffffff; /* Fundo branco para o container */
+    border-radius: 12px; /* Cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidade */
+    padding: 3rem; /* Preenchimento interno do container */
+    width: 90%; /* Largura do container (ajuste conforme necessário) */
+    max-width: 1200px; /* Largura máxima do container */
+}
+
+#containerHome h1 {
+    color: #1f4e79; /* Cor do título principal */
+    font-size: 2.5rem; /* Tamanho da fonte do título */
+    margin-bottom: 2rem; /* Margem inferior para separar do conteúdo */
+    text-align: center; /* Centraliza o texto do título */
+}
+
+/* Estilos para a seção de informações principal (lado Esquerdo e Direito) */
+#infoPrincipal {
+    display: flex; /* Layout flexível para organizar as colunas */
+    gap: 2rem; /* Espaço entre as colunas */
+    align-items: center; /* Alinha os itens (colunas) verticalmente ao centro */
+}
+
+#ladoEsquerdo {
+    flex: 1; /* Ocupa o espaço flexível disponível */
+}
+
+#ladoEsquerdo p {
+    color: #555; /* Cor do texto do parágrafo */
+    line-height: 1.6; /* Altura da linha para melhor legibilidade */
+    margin-bottom: 1.5rem; /* Margem inferior para separar dos botões */
+}
+
+/* Estilos para os botões de ação */
+.botoes {
+    display: flex; /* Layout flexível para organizar os botões */
+    gap: 1rem; /* Espaço entre os botões */
+}
+
+.btn-azul {
+    background-color: #1f4e79; /* Cor de fundo do botão azul */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Sem borda */
+    padding: 0.75rem 1.5rem; /* Preenchimento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de "mãozinha" */
+    font-weight: 500; /* Peso da fonte */
+    text-decoration: none; /* Remove sublinhado se o botão estiver dentro de um <a> */
+    display: inline-block; /* Garante que padding e margin funcionem corretamente */
+    transition: background-color 0.3s ease; /* Transição suave no hover */
+}
+
+.btn-azul:hover {
+    background-color: #153a5e; /* Escurece o botão no hover */
+}
+
+/* Estilos para o lado direito (onde a imagem será exibida) */
+#ladoDireito {
+    flex: 1; /* Ocupa o espaço flexível disponível */
+    border-radius: 8px; /* Cantos arredondados */
+    overflow: hidden; /* Garante que a imagem de fundo respeite os cantos arredondados */
+    /* Imagem de fundo para o lado direito, baseada na imagem fornecida */
+    background-image: url('../images/ftCozinheiro.jpg'); /* *AJUSTE O CAMINHO DA IMAGEM SE NECESSÁRIO* */
+    background-size: cover; /* A imagem cobre todo o espaço do container */
+    background-position: center; /* Centraliza a imagem no container */
+    min-height: 300px; /* Altura mínima para a seção da imagem, ajuste conforme a imagem */
+}
+
+/* Media Queries para responsividade em telas menores */
+@media (max-width: 768px) {
+    #infoPrincipal {
+        flex-direction: column; /* Empilha as colunas verticalmente em telas menores */
+    }
+
+    .botoes {
+        flex-direction: column; /* Empilha os botões verticalmente */
+        align-items: stretch; /* Faz os botões ocuparem a largura total */
+    }
+}

@@ -1,3 +1,4 @@
+/* Universal Styles */
 * {
     padding: 0;
     margin: 0;
@@ -9,6 +10,7 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Main Layout */
 main {
     width: 100vw;
     height: 100vh;
@@ -29,42 +31,46 @@ main {
 
 #lado_direito {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #f8f8f8;
+    padding: 20px;
 }
 
+/* Form Styling */
 form {
     width: 80%;
-    min-width: 400px;
-    height: 600px;
-    min-height: 500px;
+    max-width: 500px;
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 1rem;
+    /* Removed fixed height/min-height to allow content to define height */
 }
 
 h1 {
     font-size: 1.8rem;
     text-align: center;
     font-weight: 700;
-    color: #333;
+    color: #10375C; /* Specific brand color */
+    margin-bottom: 0.5rem;
 }
 
 p {
     text-align: center;
     color: #666;
     font-size: 0.9rem;
+    margin-bottom: 1rem;
 }
 
 label {
     font-weight: 600;
     color: #333;
+    margin-top: 0.5rem;
 }
 
 input {
@@ -75,43 +81,185 @@ input {
     padding: 0.5rem;
     outline: none;
     background-color: rgb(243, 243, 243);
+    font-size: 1rem;
 }
 
 input[type="checkbox"] {
-    width: auto; 
+    width: auto;
     height: auto;
-    margin-right: 0.5rem; 
+    margin-right: 0.5rem;
     cursor: pointer;
+    vertical-align: middle;
 }
 
+/* === Refactored 'botoes' container === */
 form .botoes {
-    display: grid;
-    grid-template-columns: auto auto; 
-    gap: 10px; 
-    justify-content: end; 
-    margin-top: 20px; 
-  }
-  
-  form .botoes button {
-    padding: 10px 20px; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    cursor: pointer; 
-  }
-  
-  form .botoes .esqueceu-senha {
-    background-color: #f0f0f0; 
-    color: #000000; 
-    border: #000000;
-  }
-  
-  form .botoes .conectar {
-    background-color: #000000; 
-    color: #fff; 
-  }
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: flex-end; /* Align primary buttons (Esqueceu, Conectar) to the right */
+    align-items: center; /* Vertically align items in the current row */
+    gap: 10px; /* Space between flex items */
+    margin-top: 20px;
+    padding-top: 15px; /* Added padding-top for spacing from input fields */
+    border-top: 1px solid #eee; /* Subtle line to separate from inputs */
+}
 
-  a{
-    text-decoration: none;
+form .botoes button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+form .botoes .esqueceu-senha {
+    background-color: #f0f0f0;
     color: #000000;
-  }
+    border: 1px solid #ddd;
+    order: 1; /* First item in visual order for the first row */
+}
+
+form .botoes .esqueceu-senha:hover {
+    background-color: #e0e0e0;
+}
+
+form .botoes .conectar {
+    background-color: #10375C; /* Specific brand color for primary action */
+    color: #fff;
+    order: 2; /* Second item in visual order for the first row */
+}
+
+form .botoes .conectar:hover {
+    background-color: #333333;
+}
+
+/* "Não tem uma conta?" text container */
+form .botoes .nao-tem-conta {
+    width: 100%; /* Forces this text to be on its own line */
+    text-align: center;
+    margin-top: 1rem; /* Space above this text from the buttons above */
+    order: 3; /* Placed after the login buttons */
+    display: flex; /* Use flex to center the paragraph */
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Allows it to take available horizontal space */
+}
+
+form .botoes .nao-tem-conta p {
+    margin: 0; /* Remove default margins from paragraph */
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* "Criar conta" button inside the 'botoes' div */
+form .botoes .criar-conta-button {
+    background-color: #007bff; /* Blue for create account - distinct from primary */
+    color: #fff;
+    order: 4; /* Placed after the "Não tem uma conta?" text */
+    width: auto;
+    min-width: 120px;
+    max-width: 200px;
+    /* Use margin: 0 auto; to center horizontally within the remaining space */
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* Ensure it takes its own line and margin auto works */
+    padding: 10px 20px; /* Match padding of other buttons */
+    font-size: 16px; /* Match font size of other buttons */
+    border-radius: 5px; /* Match border-radius */
+    border: none; /* No border for the main button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form .botoes .criar-conta-button:hover {
+    background-color: #0056b3;
+}
+
+/* Anchor Tag Styling - General and Specific */
+a {
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent for consistency */
+    display: flex; /* Use flex to center text within the button */
+    align-items: center; /* Vertically center text */
+    justify-content: center; /* Horizontally center text */
+    height: 100%;
+    width: 100%;
+    line-height: normal; /* Ensure text sits correctly */
+}
+
+form .botoes .esqueceu-senha a {
+    color: #10375C; /* Specific brand color for this link */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+    }
+
+    #lado_esquerdo {
+        width: 100%;
+        min-height: 250px;
+        height: 30vh;
+    }
+
+    #lado_direito {
+        width: 100%;
+        min-height: unset;
+        padding: 15px;
+    }
+
+    form {
+        width: 90%;
+        min-width: unset;
+        max-width: 400px;
+        padding: 1.5rem;
+        height: auto;
+        min-height: unset;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form .botoes {
+        flex-direction: column; /* Stack all buttons and text vertically */
+        align-items: stretch; /* Make items fill available width */
+        justify-content: flex-start; /* Align items to the start when stacked */
+        gap: 10px; /* Adjust gap for vertical stacking */
+        border-top: none; /* Remove border when stacked for cleaner look */
+        padding-top: 0;
+    }
+
+    form .botoes button,
+    form .botoes .nao-tem-conta {
+        width: 100%; /* Ensure full width when stacked */
+        margin-left: 0; /* Reset margins */
+        margin-right: 0;
+        order: unset; /* Reset order for simple stacking in column layout */
+    }
+
+    form .botoes .nao-tem-conta {
+        margin-top: 10px; /* Space between connect button and text */
+        margin-bottom: 5px; /* Space between text and create button */
+    }
+
+    form .botoes .criar-conta-button {
+        width: 100%; /* Full width when stacked */
+        margin-top: 0; /* Remove top margin from auto */
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    form .botoes button,
+    form .botoes .criar-conta-button {
+        font-size: 15px;
+        padding: 10px 15px;
+    }
+}
