@@ -8,7 +8,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id_cargo = $_GET['id'];
 
     try {
-        $pdo = conn(); // Obter a conexão PDO
+        // $pdo is already available from the include_once './conexao.php';
+        // No need to call a function.
 
         // 3. Preparar a query DELETE para evitar injeção de SQL (MUITO IMPORTANTE!)
         $stmt = $pdo->prepare("DELETE FROM cargo WHERE idCargo = :id");

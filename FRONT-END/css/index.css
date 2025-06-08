@@ -1,0 +1,185 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #0c2040; /* Dark blue from the image */
+    padding: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Arrange items horizontally */
+    align-items: center; /* Vertically align items */
+    justify-content: flex-start; /* Start from the left */
+    height: 60px; /* Height of the navigation bar */
+}
+
+nav ul li {
+    padding: 0 15px;
+    position: relative; /* For dropdown */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #cccccc; /* Slightly lighter white on hover */
+}
+
+.divider {
+    color: white;
+    font-size: 20px;
+    margin: 0 10px;
+}
+
+/* User Section */
+.user-section {
+    margin-left: auto; /* Pushes this item to the far right */
+    background-color: #0a1733; /* Darker blue for the user button */
+    height: 100%; /* Take full height of nav */
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    cursor: pointer; /* Indicates it's interactive */
+    position: relative; /* For the dropdown content */
+}
+
+.user-section .user-name {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.user-dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #0a1733; /* Same as user button */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 60px; /* Position below the nav bar */
+    right: 0; /* Align to the right of its parent */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.user-dropdown-content p {
+    color: white;
+    padding: 5px 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.user-dropdown-content button {
+    background-color: #d9534f; /* Red for logout button */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.user-dropdown-content button:hover {
+    background-color: #c9302c;
+}
+
+.user-section:hover .user-dropdown-content {
+    display: block; /* Show dropdown on hover */
+}
+
+
+/* Main Content */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#containerHome {
+    text-align: center;
+}
+
+#containerHome h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#infoPrincipal {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 40px; /* Space between left and right sections */
+    margin-top: 30px;
+}
+
+#ladoEsquerdo {
+    flex: 1; /* Takes remaining space */
+    text-align: left;
+    padding-right: 20px;
+}
+
+#ladoEsquerdo p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.botoes {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+}
+
+.btn-azul {
+    background-color: #10375C; /* A shade of blue similar to the image */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase; /* Match image text */
+    transition: background-color 0.3s ease;
+}
+
+.btn-azul:hover {
+    background-color: #10375C; 
+}
+
+#ladoDireito {
+    flex-shrink: 0; /* Prevent shrinking */
+    width: 450px; /* Fixed width as seen in the image */
+    height: 300px; /* Fixed height for the image container */
+    background-image: url('../images/ftCozinheiro.jpg'); /* Placeholder image path */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Adjustments for the image URL: */
+/* In a real scenario, you'd replace 'chef_finishing_touches.jpg' with the actual path to your image.
+   If the image you provided is indeed 'image_f88faf.jpg', you might rename it or use that filename.
+   For this refactoring, I'm assuming a generic name for the image to be placed. */

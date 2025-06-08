@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    $_SESSION['erro_login'] = "Você precisa estar logado para acessar esta página.";
+    header('Location: FormLogin.php'); // FormLogin.php está na mesma pasta 'html'
+    exit();
+}
+
+$usuario_email = $_SESSION['usuario_email'] ?? 'Usuário';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -11,11 +23,20 @@
     <header>
         <nav>
             <ul class="menu">
-                <li><a href="#">Livros</a></li>
+                <li><a href="./index.php">RCBR</a></li>
+                <li><a href="./telaLivros.php">Livros</a></li>
                 <li><a href="#">Receitas</a></li>
+                <li><a href="GerenciarCargos.php">Cargos</a></li>
                 <li><a href="#">Funcionários</a></li>
-                <li class="menu-right"><a href="#">Restaurantes</a></li>
-                <li><button class="usuario-btn">USUÁRIO</button></li>
+                <li class="menu-right"><a href="./ListarRestaurantes.php">Restaurantes</a></li>
+                <li class="user-section">
+                    <span class="user-name">USUARIO</span>
+                    <div class="user-dropdown-content">
+                        <p><?php echo htmlspecialchars($usuario_email); ?></p>
+                        <form action="../../BACK-END/logout.php" method="POST">
+                            <button type="submit">Sair</button>
+                        </form>
+                    </div>
             </ul>
         </nav>
     </header>
@@ -23,8 +44,8 @@
     <main>
         <h1>Cargos Cadastrados</h1>
 
-        <?php
-        include_once '../../BACK-END/conexao.php'; 
+       <?php
+        include_once '../../BACK-END/conexao.php';
 
         $search_term = '';
         if (isset($_GET['search']) && !empty($_GET['search'])) {
@@ -32,35 +53,30 @@
         }
 
         try {
-            $pdo = conn();
+            // $pdo is already available from the include_once '../../BACK-END/conexao.php';
+            // No need to call a function.
 
             $sql = "SELECT idCargo, nomeCargo, DescCargo, data_inicio, ind_ativo FROM cargo";
-            
+
             if (!empty($search_term)) {
                 $sql .= " WHERE nomeCargo LIKE :search_term OR DescCargo LIKE :search_term";
             }
             $sql .= " ORDER BY nomeCargo ASC";
 
-            $stmt = $pdo->prepare($sql); 
+            $stmt = $pdo->prepare($sql);
 
             if (!empty($search_term)) {
                 $stmt->bindValue(':search_term', '%' . $search_term . '%', PDO::PARAM_STR);
             }
-            
+
             $stmt->execute();
             $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         } catch (PDOException $e) {
             echo '<p style="color: red; font-weight: bold;">Erro ao carregar os cargos: ' . $e->getMessage() . '</p>';
-            $cargos = []; 
+            $cargos = [];
         }
         ?>
-
-        <?php if (isset($_GET['status']) && isset($_GET['msg'])): ?>
-            <p class="status-message <?php echo htmlspecialchars($_GET['status']); ?>">
-                <?php echo htmlspecialchars(urldecode($_GET['msg'])); ?>
-            </p>
-        <?php endif; ?>
 
         <a href="FormCargos.php" class="add-new-cargo">Adicionar Novo Cargo</a>
 
