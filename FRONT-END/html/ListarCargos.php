@@ -41,7 +41,6 @@ $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
 
-    <main>
         <h1>LISTAR CARGOS</h1>
         <div class="controls-container">
             <div class="search-container">
@@ -64,36 +63,40 @@ $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         echo "<td>" . htmlspecialchars($cargo["descricao"]) . "</td>";
                         echo "<td>" . htmlspecialchars($cargo["ind_ativo"]) . "</td>";
                         echo "<td>
-                <form method='POST' action='../../BACK-END/excluirCargo.php'>
-                    <input type='hidden' name='idCargo' value='" . htmlspecialchars($cargo["idCargo"]) . "'>
-                    <button type='submit'>Excluir</button>
-                </form>
-              </td>";
+                    <a href='EditCargo.php?idCargo=" . htmlspecialchars($cargo["idCargo"]) . "'>
+                        <button type='button'>Atualizar</button>
+                    </a>
+                </td>";
+                        echo "<td>
+                    <form method='POST' action='../../BACK-END/excluirCargo.php'>
+                        <input type='hidden' name='idCargo' value='" . htmlspecialchars($cargo["idCargo"]) . "'>
+                        <button type='submit'>Excluir</button>
+                    </form>
+                </td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='5'>Nenhum cargo encontrado</td></tr>";
+                    echo "<tr><td colspan='6'>Nenhum cargo encontrado</td></tr>";
                 }
                 ?>
             </tbody>
-
         </table>
     </main>
 </body>
 <script>
-document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const pesquisa = document.querySelector("input[name='pesquisarCargo']").value;
+    document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const pesquisa = document.querySelector("input[name='pesquisarCargo']").value;
 
-    fetch(`../../BACK-END/PesquisarCargo.php?pesquisarCargo=${pesquisa}`)
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.querySelector("tbody");
-            tbody.innerHTML = "";
+        fetch(`../../BACK-END/PesquisarCargo.php?pesquisarCargo=${pesquisa}`)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector("tbody");
+                tbody.innerHTML = "";
 
-            if (data.length > 0) {
-                data.forEach(cargo => {
-                    tbody.innerHTML += `
+                if (data.length > 0) {
+                    data.forEach(cargo => {
+                        tbody.innerHTML += `
                         <tr>
                             <td>${cargo.idCargo}</td>
                             <td>${cargo.nomeCargo}</td>
@@ -107,12 +110,12 @@ document.querySelector("form").addEventListener("submit", function(event) {
                             </td>
                         </tr>
                     `;
-                });
-            } else {
-                tbody.innerHTML = "<tr><td colspan='5'>Nenhum cargo encontrado</td></tr>";
-            }
-        });
-});
+                    });
+                } else {
+                    tbody.innerHTML = "<tr><td colspan='5'>Nenhum cargo encontrado</td></tr>";
+                }
+            });
+    });
 </script>
 
 </html>

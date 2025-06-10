@@ -13,6 +13,6 @@ if (isset($_GET['pesquisarCargo']) && !empty($_GET['pesquisarCargo'])) {
 
     $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode($cargos); // Retorna os dados em formato JSON
+    echo json_encode($cargos);
 }
 ?>
