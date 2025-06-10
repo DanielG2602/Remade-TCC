@@ -25,6 +25,9 @@ try{
         ':Cargo_idCargo' => $cargo_idCargo,
     ]);
 
+    header('Location: ../FRONT-END/html/ListarFuncionarios.php');
+    exit(); // garante o redirecionamento
+
 }catch(PDOException $e){
     echo "Erro: " . $e->getMessage();
 }

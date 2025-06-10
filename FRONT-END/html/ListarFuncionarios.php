@@ -1,3 +1,17 @@
+<?php 
+
+include_once __DIR__ . '/../../BACK-END/conexao.php';
+
+$conn = conn();
+
+$sql = "SELECT idFuncionario, nome, Cargo_idCargo FROM funcionario";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
+$funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -22,43 +36,33 @@
   <main>
     <h1>Listar Funcionários</h1>
     <table>
-      <thead>
-        <tr>
-          <th>Nome Funcionário</th> 
-          <th>Data Emissão</th>
-          <th>Salário</th> 
-          <th>Cargo</th> 
-          <th>Incluir Cargo</th> 
-          <th>Pesquisar</th> 
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>João Paulo</td>
-          <td>1 Mar 2022</td>
-          <td>R$2.700</td>
-          <td>Cozinheiro</td>
-          <td><button class="ativo-btn">SIM</button></td>
-          <td>
-            <img src="lapis.jpg" alt="Editar">
-            <img src="lixeira3.png" alt="Excluir">
-            <img src="maismaismais.png" alt="Adicionar">
-          </td>
-        </tr>
-        <tr>
-          <td>Luy</td>
-          <td>10 Mar 2022</td>
-          <td>R$7.000</td>
-          <td>Analista de Sistemas</td>
-          <td><button class="ativo-btn">NÃO</button></td>
-          <td>
-            <img src="lapis.jpg" alt="Editar">
-            <img src="lixeira3.png" alt="Excluir">
-            <img src="maismaismais.png" alt="Adicionar">
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <tbody>
+                <?php
+                if ($funcionarios) {
+                    foreach ($funcionarios as $funcionario) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($funcionario["idFuncionario"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($funcionario["nome"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($funcionario["Cargo_idCargo"]) . "</td>";
+                        echo "<td>
+                    <a href='EditCargo.php?idCargo=" . htmlspecialchars($funcionario["idFuncionario"]) . "'>
+                        <button type='button'>Atualizar</button>
+                    </a>
+                </td>";
+                        echo "<td>
+                    <form method='POST' action='../../BACK-END/excluir_funcionario.php'>
+                        <input type='hidden' name='idFuncionario' value='" . htmlspecialchars($funcionario["idFuncionario"]) . "'>
+                        <button type='submit'>Excluir</button>
+                    </form>
+                </td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>Nenhum cargo encontrado</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
   </main>
 </body>
 </html>
