@@ -18,8 +18,6 @@ if (ini_get("session.use_cookies")) {
 
 session_destroy();
 
-// 4. Redireciona o usuário para a página de login após o logout.
-// O caminho agora é relativo a partir de BACK-END/ para FRONT-END/html/
 header('Location: ../FRONT-END/html/FormLogin.php');
 exit();
 ?>

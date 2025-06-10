@@ -1,11 +1,11 @@
 <?php
 
-session_start(); 
+session_start();
 
 $erro_login = '';
 if (isset($_SESSION['erro_login'])) {
     $erro_login = $_SESSION['erro_login'];
-    unset($_SESSION['erro_login']); 
+    unset($_SESSION['erro_login']);
 }
 
 if (isset($_SESSION['usuario_id'])) {
@@ -26,7 +26,7 @@ if (isset($_SESSION['usuario_id'])) {
 </head>
 <body>
     <main>
-        <div id="lado_esquerdo"></div>  
+        <div id="lado_esquerdo"></div>
         <div id="lado_direito">
             <form action="../../BACK-END/ValidaUsuario.php" method="post">
                 <h1>Informe os dados de acesso</h1>
@@ -46,11 +46,17 @@ if (isset($_SESSION['usuario_id'])) {
                     <input type="checkbox" name="manter_conectado"> Manter Conectado
                 </label>
 
-                  <div class="botoes">
-                    <button type="button" class="esqueceu-senha"><a href="../html/FormEsqueceuSenha.html">Esqueceu sua Senha?</a> </button>
+                <div class="botoes">
+                    <button type="button" class="esqueceu-senha"><a href="./FormEsqueceuSenha.php">Esqueceu sua Senha?</a> </button>
                     <button type="submit" class="conectar">Conecta-se</button>
-                  </div>
+
+                    <div class="nao-tem-conta"> <p>Não tem uma conta?</p>
+                    </div>
+                    <button type="button" class="criar-conta-button"><a href="./formCadastroUsuario.php">Criar conta</a></button>
+                </div>
+
             </form>
-        </div>  
+        </div>
     </main>
 </body>
+</html>

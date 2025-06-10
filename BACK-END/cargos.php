@@ -1,27 +1,53 @@
-<?php 
-include_once'./conexao.php';
+<?php
+include_once './conexao.php';
 
-$nomeCargo = $_POST["NomeCargo"];
-$descCargo = $_POST['DescCargo'];
-$status = $_POST['Status'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        // $pdo is already available from the include_once './conexao.php';
+        // No need to call a function, as $pdo is already defined in conexao.php
 
-try {
-    $pdo = conn();
-    $sql = "INSERT INTO cargo (nomeCargo, descricao, ind_ativo) 
-            VALUES (:nomeCargo, :descricao, :idn_ativo)";
-            
-    $stmt = $pdo->prepare($sql);
+        $nomeCargo = htmlspecialchars(trim($_POST["NomeCargo"]));
+        $descCargo = htmlspecialchars(trim($_POST['DescCargo']));
+        $data_inicio = htmlspecialchars(trim($_POST['data_inicio']));
+        $status = htmlspecialchars(trim($_POST['Status']));
 
-    $stmt->execute( [
-        ':nomeCargo' => $nomeCargo,
-        ':descricao' => $descCargo,
-        ':idn_ativo' => $status,
-    ]);
+        $ind_ativo_value = ($status === 'Ativo') ? 1 : 0;
 
-    echo "Dados inseridos com sucesso!";
+        if (empty($nomeCargo) || empty($descCargo) || empty($data_inicio) || empty($status)) {
+            header("Location: ../FRONT-END/html/FormCargos.php?status=erro&msg=campos_obrigatorios");
+            exit();
+        }
 
-} catch(PDOException $e){
-    echo "Erro: " . $e->getMessage();
+        $sql = "INSERT INTO cargo (nomeCargo, DescCargo, data_inicio, ind_ativo)
+                VALUES (:nomeCargo, :descricao, :data_inicio, :ind_ativo)";
+
+        $stmt = $pdo->prepare($sql);
+
+        if ($stmt === false) {
+            $errorInfo = $pdo->errorInfo();
+            error_log("Erro na preparação da query SQL: " . $errorInfo[2]);
+            header("Location: ../FRONT-END/html/FormCargos.php?status=erro&msg=erro_query_preparacao&details=" . urlencode($errorInfo[2]));
+            exit();
+        }
+
+        $stmt->execute([
+            ':nomeCargo' => $nomeCargo,
+            ':descricao' => $descCargo,
+            ':data_inicio'=> $data_inicio,
+            ':ind_ativo' => $ind_ativo_value
+        ]);
+
+        header("Location: ../FRONT-END/html/GerenciarCargos.php?status=sucesso&msg=cargo_cadastrado");
+        exit();
+
+    } catch(PDOException $e){
+        error_log("Erro PDO ao inserir cargo: " . $e->getMessage());
+        header("Location: ../FRONT-END/html/FormCargos.php?status=erro&msg=erro_db&details=" . urlencode($e->getMessage()));
+        exit();
+    }
+
+} else {
+    header("Location: ../FRONT-END/html/FormCargos.php");
+    exit();
 }
-
 ?>

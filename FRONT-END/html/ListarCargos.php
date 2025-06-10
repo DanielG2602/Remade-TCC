@@ -1,6 +1,6 @@
 <?php
-// Incluir arquivo de conexão
-include_once '../../BACK-END/conexao.php'; // Certifique-se de que este arquivo contém a função de conexão
+include_once __DIR__ . '/../../BACK-END/conexao.php';
+include_once '../../BACK-END/PesquisarCargo.php'; // Inclui a pesquisa
 
 // Criar a conexão
 
@@ -45,8 +45,10 @@ $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>LISTAR CARGOS</h1>
         <div class="controls-container">
             <div class="search-container">
-                <input type="text" placeholder="FAÇA SUA PESQUISA">
-                <button>BUSCAR</button>
+                <form action="../../BACK-END/PesquisarCargo.php" method="get">
+                    <input type="text" name="pesquisarCargo" placeholder="FAÇA SUA PESQUISA">
+                    <input type="submit" value="Buscar">
+                </form>
             </div>
             <button class="add-button">ADICIONAR CARGO</button>
         </div>
@@ -78,5 +80,39 @@ $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </table>
     </main>
 </body>
+<script>
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const pesquisa = document.querySelector("input[name='pesquisarCargo']").value;
+
+    fetch(`../../BACK-END/PesquisarCargo.php?pesquisarCargo=${pesquisa}`)
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.querySelector("tbody");
+            tbody.innerHTML = "";
+
+            if (data.length > 0) {
+                data.forEach(cargo => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${cargo.idCargo}</td>
+                            <td>${cargo.nomeCargo}</td>
+                            <td>${cargo.descricao}</td>
+                            <td>${cargo.ind_ativo}</td>
+                            <td>
+                                <form method='POST' action='../../BACK-END/excluirCargo.php'>
+                                    <input type='hidden' name='idCargo' value='${cargo.idCargo}'>
+                                    <button type='submit'>Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = "<tr><td colspan='5'>Nenhum cargo encontrado</td></tr>";
+            }
+        });
+});
+</script>
 
 </html>

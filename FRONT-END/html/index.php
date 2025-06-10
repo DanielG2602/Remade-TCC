@@ -1,39 +1,39 @@
 <?php
-
-session_start(); 
+session_start();
 
 if (!isset($_SESSION['usuario_id'])) {
-
     $_SESSION['erro_login'] = "Você precisa estar logado para acessar esta página.";
     header('Location: FormLogin.php'); // FormLogin.php está na mesma pasta 'html'
     exit();
 }
 
-
-$usuario_email = $_SESSION['usuario_email'] ?? 'Usuário'; 
+$usuario_email = $_SESSION['usuario_email'] ?? 'Usuário';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css"> <title>Home | Sistema RCBR</title>
+    <link rel="stylesheet" href="../css/index.css"> <title>Home | Sistema RCBR</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#">Livros</a></li>
+                <li><a href="index.php">RCBR</a></li>
                 <li><a href="#">Receitas</a></li>
-                <li><a href="#">Funcionários</a></li>
-                <li><a href="#">Chefes de Cozinha</a></li>
+                <li><a href="./GerenciarCargos.php">Cargos</a></li>
+                <li><a href="./ListaFuncionarios.php">Funcionarios</a></li>
                 <li class="divider">|</li>
-                <li><a href="ListaRestaurantes.php">Restaurantes</a></li> <li>
-                    <button class="btn-user">
-                        <?php echo htmlspecialchars($usuario_email); ?> </button>
-                    <form action="../../logout.php" method="POST" style="display:inline;">
-                        <button type="submit" class="btn-user" style="margin-left: 10px;">Sair</button>
-                    </form>
+                <li><a href="./ListaRestaurantes.php">Restaurantes</a></li>
+                <li class="user-section">
+                    <span class="user-name">USUARIO</span>
+                    <div class="user-dropdown-content">
+                        <p><?php echo htmlspecialchars($usuario_email); ?></p>
+                        <form action="../../BACK-END/logout.php" method="POST">
+                            <button type="submit">Sair</button>
+                        </form>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -41,18 +41,19 @@ $usuario_email = $_SESSION['usuario_email'] ?? 'Usuário';
 
     <main>
         <section id="containerHome">
-            <h1>BEM VINDO AO SISTEMA RCBR, <?php echo htmlspecialchars($usuario_email); ?>!</h1>
+            <h1>Bem Vindo ao Sistema RCBR</h1>
             <div id="infoPrincipal">
                 <div id="ladoEsquerdo">
                     <p>
-                        O Sistema RCBR é uma plataforma integrada para organização de receitas, livros e gestão de restaurantes. Explore nossos recursos e facilite o dia a dia da sua cozinha.
+                        Sistema Criado em proposito para vizualizar Livros/receitas de acordo com sua permissão de usuario.
+                        O sistema tambem permite avaliar receitas, cadastra receitas criadas por Chefe de Cozinha
                     </p>
                     <div class="botoes">
-                        <button class="btn-azul">Visualizar Livros</button>
-                        <button class="btn-azul">Cadastrar Livro</button>
+                        <button class="btn-azul"><a href="telaLivros.php">VISUALIZAR LIVROS</a></button>
+                        <button class="btn-azul"><a href="RegistrarLivro.php">REGISTRAR LIVRO</a></button>
                     </div>
                 </div>
-                <div id="ladoDireito" aria-hidden="true"></div>
+                <div id="ladoDireito"></div>
             </div>
         </section>
     </main>

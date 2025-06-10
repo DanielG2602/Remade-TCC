@@ -12,25 +12,31 @@
 
         <h1>Cadastro de Receitas</h1>
 
-        <label for="nomeReceita">Nome da Receita</label>
-        <input type="text" name="nomeReceita" required>
+        <label for="nome_rct">Nome da Receita</label>
+        <input type="text" name="nome_rct" maxlength="50" required>
+        <br><br>
 
-        <label for="dataCriacao">Informe a Data de Criação da Receita</label>
-        <input type="date" name="dataCriacao" required>
+        <label for="dt_criacao">Data de Criação da Receita</label>
+        <input type="date" name="dt_criacao" required>
+        <br><br>
+        
+        <label for="preparo">Método de Preparo</label>
+        <textarea name="preparo" rows="10" cols="50" maxlength="5000" required></textarea>
+        <br><br>
 
-        <label for="nomeChefe">Nome do Chefe</label>
-        <input type="text" name="nomeChefe" required>
+        <label for="quantidade_porcao">Quantidade de Porção</label>
+        <input type="number" name="quantidade_porcao" step="0.1" required>
+        <br><br>
 
-        <label for="metodoPreparo">Metodo de preparo</label>
-        <input type="text" name="metodoPreparo" required>
+        <label for="ind_rec_inedita">Receita Inédita?</label>
+        <select name="ind_rec_inedita" required>
+            <option value="">Selecione</option>
+            <option value="S">Sim</option>
+            <option value="N">Não</option>
+        </select>
+        <br><br>
 
-        <label for="qtdPorcao">Quantidade de Porção</label>
-        <input type="text" name="qtdPorcao" required>
-
-        <label for="ind_rec_inedita">Indicador de receita inédita</label>
-        <input type="text" name="ind_rec_inedita" required>
-
-        <input type="submit" value="Next">
+        <input type="submit" value="Cadastrar Receita">
 
     </form>
 </body>
