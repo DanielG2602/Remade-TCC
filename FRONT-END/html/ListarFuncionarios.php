@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once __DIR__ . '/../../BACK-END/conexao.php';
 
@@ -14,12 +14,14 @@ $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Listar Funcionários</title>
   <link rel="stylesheet" href=../css/ListarFuncionarios.css>
 </head>
+
 <body>
   <header>
     <nav>
@@ -36,15 +38,15 @@ $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <main>
     <h1>Listar Funcionários</h1>
     <table>
-            <tbody>
-                <?php
-                if ($funcionarios) {
-                    foreach ($funcionarios as $funcionario) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($funcionario["idFuncionario"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($funcionario["nome"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($funcionario["Cargo_idCargo"]) . "</td>";
-                        echo "<td>
+      <tbody>
+        <?php
+        if ($funcionarios) {
+          foreach ($funcionarios as $funcionario) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($funcionario["idFuncionario"]) . "</td>";
+            echo "<td>" . htmlspecialchars($funcionario["nome"]) . "</td>";
+            echo "<td>" . htmlspecialchars($funcionario["Cargo_idCargo"]) . "</td>";
+            echo "<td>
                     <a href='EditFuncionario.php?idFuncionario=" . htmlspecialchars($funcionario["idFuncionario"]) . "'>
                         <button type='button'>Atualizar</button>
                     </a>
@@ -52,20 +54,22 @@ $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <button type='button'>Consultar</button>
                     </a>
                 </td>";
-                        echo "<td>
+            echo "<td>
                     <form method='POST' action='../../BACK-END/excluir_funcionario.php'>
                         <input type='hidden' name='idFuncionario' value='" . htmlspecialchars($funcionario["idFuncionario"]) . "'>
                         <button type='submit'>Excluir</button>
                     </form>
                 </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='6'>Nenhum cargo encontrado</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+            echo "</tr>";
+          }
+        } else {
+          echo "<tr><td colspan='6'>Nenhum cargo encontrado</td></tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+    <button><a href="./FormFuncionario.php">Adicionar funcionario</a></button>
   </main>
 </body>
+
 </html>
