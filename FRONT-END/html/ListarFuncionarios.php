@@ -25,7 +25,7 @@ $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav>
       <ul class="menu">
         <li><a href="#">Livros</a></li>
-        <li><a href="#">Receitas</a></li>
+        <li><a href="./FormReceitas.php">Receitas</a></li>
         <li><a href="#">Funcionários</a></li>
         <li class="menu-right"><a href="#">Restaurantes</a></li>
         <li><button class="usuario-btn">USUÁRIO</button></li>
@@ -45,8 +45,11 @@ $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         echo "<td>" . htmlspecialchars($funcionario["nome"]) . "</td>";
                         echo "<td>" . htmlspecialchars($funcionario["Cargo_idCargo"]) . "</td>";
                         echo "<td>
-                    <a href='EditCargo.php?idCargo=" . htmlspecialchars($funcionario["idFuncionario"]) . "'>
+                    <a href='EditFuncionario.php?idFuncionario=" . htmlspecialchars($funcionario["idFuncionario"]) . "'>
                         <button type='button'>Atualizar</button>
+                    </a>
+                    <a href='ConsultaFuncionario.php?idFuncionario=" . htmlspecialchars($funcionario["idFuncionario"]) . "'>
+                        <button type='button'>Consultar</button>
                     </a>
                 </td>";
                         echo "<td>
