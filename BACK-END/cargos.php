@@ -3,9 +3,7 @@ include_once './conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        // $pdo is already available from the include_once './conexao.php';
-        // No need to call a function, as $pdo is already defined in conexao.php
-
+        
         $nomeCargo = htmlspecialchars(trim($_POST["NomeCargo"]));
         $descCargo = htmlspecialchars(trim($_POST['DescCargo']));
         $data_inicio = htmlspecialchars(trim($_POST['data_inicio']));

@@ -1,7 +1,7 @@
 <?php
 
-// 1. Incluir o arquivo de conexão com o banco de dados
-include_once './conexao.php'; // Ajuste o caminho se necessário
+
+include_once './conexao.php';
 
 // 2. Verificar se o ID do cargo foi passado via GET
 if (isset($_GET['id']) && !empty($_GET['id'])) {
