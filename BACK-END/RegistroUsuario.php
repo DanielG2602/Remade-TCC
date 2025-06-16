@@ -47,10 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Verifica se o e-mail já está cadastrado no banco de dados
-        $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM `Usuario` WHERE Email = :email");
-        $stmt_check->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt_check->execute();
-        if ($stmt_check->fetchColumn() > 0) {
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM `usuario` WHERE Email = :email");
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->fetchColumn() > 0) {
             $_SESSION['mensagem_registro'] = "Este e-mail já está cadastrado. Por favor, use outro.";
             $_SESSION['tipo_mensagem'] = "erro";
             header('Location: ../FRONT-END/html/FormCadastroUsuario.php');
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $jws_funcionario_id = 1; 
 
         // Prepara a query SQL para inserir o novo usuário
-        $stmt_insert = $pdo->prepare("INSERT INTO `Usuario` (Email, Senha, JWSL_Funcionario_idFuncionario) VALUES (:email, :senha, :idFuncionario)");
+        $stmt_insert = $pdo->prepare("INSERT INTO `usuario` (Email, Senha, JWSL_Funcionario_idFuncionario) VALUES (:email, :senha, :idFuncionario)");
         // Associa os parâmetros para prevenir SQL Injection
         $stmt_insert->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt_insert->bindParam(':senha', $senha_hashed, PDO::PARAM_STR);
