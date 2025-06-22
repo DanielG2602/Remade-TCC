@@ -27,7 +27,7 @@ if (isset($_SESSION['mensagem_registro'])) {
         <div id="lado_esquerdo">
             </div> 
         <div id="lado_direito">
-            <form action="../../BACK-END/RegistroUsuario.php" method="post">
+            <form action="../../BACK-END/ADM/RegistroUsuario.php" method="post">
                 <h1>Registra-se</h1>
                 <p>Será necessário fornecer as seguintes informações:</p>
 

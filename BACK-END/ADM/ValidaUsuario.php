@@ -1,6 +1,6 @@
 <?php
  session_start();
- require_once 'conexao.php'; 
+ require_once '../conexao.php';
 
  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = trim($_POST['email'] ?? '');
@@ -13,7 +13,7 @@
   }
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
    $_SESSION['erro_login'] = "E-mail inválido.";
-   header('Location: ../FRONT-END/html/FormLogin.php');
+   header('Location: ../../FRONT-END/html/FormLogin.php');
    exit();
   }
 
@@ -31,23 +31,23 @@
     $_SESSION['usuario_email'] = $usuario['email'];
 
 
-    header('Location: ../FRONT-END/html/index.php');
+    header('Location: ../../FRONT-END/html/index.php');
     exit();
    } else {
-    // Credenciais inválidas
+
     $_SESSION['erro_login'] = "E-mail ou senha incorretos.";
-    header('Location: ../FRONT-END/html/FormLogin.php');
+    header('Location: ../../FRONT-END/html/FormLogin.php');
     exit();
    }
   } catch (PDOException $e) {
    error_log("Erro no login: " . $e->getMessage()); // Registra o erro no log do servidor
    $_SESSION['erro_login'] = "Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.";
-   header('Location: ../FRONT-END/html/FormLogin.php');
+   header('Location: ../../FRONT-END/html/FormLogin.php');
    exit();
   }
  } else {
 
-  header('Location: ../FRONT-END/html/FormLogin.php');
+  header('Location: ../../FRONT-END/html/FormLogin.php');
   exit();
  }
  ?>

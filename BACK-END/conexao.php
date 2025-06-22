@@ -6,7 +6,7 @@ function conn()
     $port = "3306"; 
     $dbname = "acervorct"; 
     $usuario = "root"; 
-    $senha = "Matheusa.s08."; // Senha do banco de dados
+    $senha = ""; // Senha do banco de dados
 
     try {
         $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
