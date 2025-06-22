@@ -50,8 +50,8 @@ if (isset($_SESSION['mensagem_registro'])) {
                 <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme sua senha" required>        
 
                 <div class="botoes">
-                    <button type="button" class="cancelar"><a href="../html/index.html">Cancelar</a></button>
-                    <button type="submit" class="confirmar">Confirmar</button>
+                    <button type="button" class="cancelar"><a href="./FormLogin.php">Cancelar</a></button>
+                    <button type="submit" class="confirmar"><a href="./FormLogin.php"></a>Confirmar</button>
                 </div> 
             </form>
         </div>  
