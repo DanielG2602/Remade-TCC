@@ -1,11 +1,8 @@
 <?php
 
-
-session_start(); 
-
+session_start();
 
 $_SESSION = array();
-
 
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
@@ -15,9 +12,8 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-
 session_destroy();
 
-header('Location: ../FRONT-END/html/FormLogin.php');
+header('Location: ../../FRONT-END/html/FormLogin.php'); 
 exit();
 ?>

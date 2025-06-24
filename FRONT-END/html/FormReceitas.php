@@ -4,7 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/FormReceitas.css" />
     <title>Cadastro de Receita</title>
+    <header>
+    <nav>
+      <ul>
+        <li><a href="telaLivros.php">Livros</a></li>
+        <li><a href="FormReceitas.php">Receitas</a></li>
+        <li><a href="FormFuncionario.php">Funcionários</a></li>
+        <li class="divider">|</li>
+        <li><a href="ListarRestaurante.php">Restaurantes</a></li>
+        <li><button class="btn-user">USUÁRIO</button></li>
+      </ul>
+    </nav>
+  </header>
 </head>
 
 <body>

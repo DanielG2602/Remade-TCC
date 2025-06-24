@@ -27,7 +27,7 @@ if (isset($_SESSION['mensagem_registro'])) {
         <div id="lado_esquerdo">
             </div> 
         <div id="lado_direito">
-            <form action="../../BACK-END/RegistroUsuario.php" method="post">
+            <form action="../../BACK-END/ADM/RegistroUsuario.php" method="post">
                 <h1>Registra-se</h1>
                 <p>Será necessário fornecer as seguintes informações:</p>
 
@@ -36,6 +36,9 @@ if (isset($_SESSION['mensagem_registro'])) {
                     <?php echo htmlspecialchars($mensagem_registro); ?>
                 </div>
                 <?php endif; ?>
+
+                <label for="NomeUser">Informe seu Nome:</label>
+                <input type="text" id="email" name="NomeUser" placeholder="Nome completo" required>
 
                 <label for="email">Informe seu Email:</label>
                 <input type="email" id="email" name="email" placeholder="Email" required>
@@ -50,8 +53,8 @@ if (isset($_SESSION['mensagem_registro'])) {
                 <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme sua senha" required>        
 
                 <div class="botoes">
-                    <button type="button" class="cancelar"><a href="../html/index.html">Cancelar</a></button>
-                    <button type="submit" class="confirmar">Confirmar</button>
+                    <button type="button" class="cancelar"><a href="./FormLogin.php">Cancelar</a></button>
+                    <button type="submit" class="confirmar"><a href="./FormLogin.php"></a>Confirmar</button>
                 </div> 
             </form>
         </div>  
