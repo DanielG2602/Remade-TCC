@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
+        $pdo =conn();
         // Verifica se o e-mail já está cadastrado no banco de dados
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM `usuario` WHERE Email = :email");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);

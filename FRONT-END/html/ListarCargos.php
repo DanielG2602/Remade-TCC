@@ -68,10 +68,10 @@ $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </a>
                 </td>";
                         echo "<td>
-                    <form method='POST' action='../../BACK-END/excluirCargo.php'>
-                        <input type='hidden' name='idCargo' value='" . htmlspecialchars($cargo["idCargo"]) . "'>
-                        <button type='submit'>Excluir</button>
-                    </form>
+                            <form method='POST' action='../../BACK-END/excluirCargo.php'>
+                                <input type='hidden' name='idCargo' value='" . htmlspecialchars($cargo["idCargo"]) . "'>
+                                <button type='submit'>Excluir</button>
+                            </form>
                 </td>";
                         echo "</tr>";
                     }
