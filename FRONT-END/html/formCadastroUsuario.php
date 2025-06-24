@@ -37,6 +37,9 @@ if (isset($_SESSION['mensagem_registro'])) {
                 </div>
                 <?php endif; ?>
 
+                <label for="NomeUser">Informe seu Nome:</label>
+                <input type="text" id="email" name="NomeUser" placeholder="Nome completo" required>
+
                 <label for="email">Informe seu Email:</label>
                 <input type="email" id="email" name="email" placeholder="Email" required>
 

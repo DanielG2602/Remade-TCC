@@ -13,6 +13,7 @@ function redirecionarComMensagem($mensagem, $tipo_mensagem = 'erro') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $NomeUser = trim($_POST['nomeUser'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $confirmar_email = trim($_POST['confirmar_email'] ?? '');
     $senha = $_POST['senha'] ?? '';
@@ -48,8 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
     try {
-        $stmt = $pdo->prepare("INSERT INTO usuarios (email, senha) VALUES (:email, :senha)");
+        $stmt = $pdo->prepare("INSERT INTO usuarios (NomeUser, email, senha) VALUES (:NomeUser, :email, :senha)");
         $stmt->execute([
+            'NomeUser' => $NomeUser,
             'email' => $email,
             'senha' => $senha_hash
         ]);
