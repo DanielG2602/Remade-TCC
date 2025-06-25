@@ -3,7 +3,7 @@
 function conn()
 {
     $host = "localhost"; 
-    $port = "3307"; 
+    $port = "3306"; 
     $dbname = "acervorct"; 
     $usuario = "root"; 
     $senha = ""; 
