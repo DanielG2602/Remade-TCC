@@ -1,14 +1,4 @@
-<?php
-session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
-    $_SESSION['erro_login'] = "Você precisa estar logado para acessar esta página.";
-    header('Location: FormLogin.php'); // FormLogin.php está na mesma pasta 'html'
-    exit();
-}
-
-$usuario_email = $_SESSION['usuario_email'] ?? 'Usuário';
-?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -32,7 +22,6 @@ $usuario_email = $_SESSION['usuario_email'] ?? 'Usuário';
                 <li class="user-section">
                     <span class="user-name">USUARIO</span>
                     <div class="user-dropdown-content">
-                        <p><?php echo htmlspecialchars($usuario_email); ?></p>
                         <form action="../../BACK-END/logout.php" method="POST">
                             <button type="submit">Sair</button>
                         </form>
@@ -53,6 +42,7 @@ $usuario_email = $_SESSION['usuario_email'] ?? 'Usuário';
         }
 
         try {
+            $pdo=conn();
             // $pdo is already available from the include_once '../../BACK-END/conexao.php';
             // No need to call a function.
 

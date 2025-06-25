@@ -3,6 +3,7 @@ include_once './conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
+        $pdo=conn();
         
         $nomeCargo = htmlspecialchars(trim($_POST["NomeCargo"]));
         $descCargo = htmlspecialchars(trim($_POST['DescCargo']));

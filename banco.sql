@@ -289,23 +289,12 @@ CREATE TABLE IF NOT EXISTS `AcervoRct`.`Publicacao` (
 ) ENGINE=InnoDB;
 
 
-
--- -----------------------------------------------------
--- Table `AcervoRct`.`Usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AcervoRct`.`Usuario` (
-  `idusuario` INT NOT NULL AUTO_INCREMENT,
-  `Email` VARCHAR(60) NOT NULL COMMENT 'Contém o email para registro no sistema, permitindo o login.',
-  `Senha` VARCHAR(20) NOT NULL COMMENT 'Senha usada para autenticação junto ao email.',
-  `JWSL_Funcionario_idFuncionario` INT NOT NULL,
-  PRIMARY KEY (`idusuario`),
-  INDEX `fk_usuario_JWSL_Funcionario1_idx` (`JWSL_Funcionario_idFuncionario` ASC),
-  CONSTRAINT `fk_usuario_JWSL_Funcionario1`
-    FOREIGN KEY (`JWSL_Funcionario_idFuncionario`)
-    REFERENCES `AcervoRct`.`Funcionario` (`idFuncionario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-) ENGINE=InnoDB;
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
 

@@ -43,7 +43,6 @@ $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($funcionarios) {
           foreach ($funcionarios as $funcionario) {
             echo "<tr>";
-            echo "<td>" . htmlspecialchars($funcionario["idFuncionario"]) . "</td>";
             echo "<td>" . htmlspecialchars($funcionario["nome"]) . "</td>";
             echo "<td>" . htmlspecialchars($funcionario["Cargo_idCargo"]) . "</td>";
             echo "<td>

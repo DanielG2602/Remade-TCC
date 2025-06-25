@@ -30,7 +30,7 @@ $usuario_email = $_SESSION['usuario_email'] ?? 'Usuário';
                     <span class="user-name">USUARIO</span>
                     <div class="user-dropdown-content">
                         <p><?php echo htmlspecialchars($usuario_email); ?></p>
-                        <form action="../../BACK-END/logout.php" method="POST">
+                        <form action="../../BACK-END/ADM/logout.php" method="POST">
                             <button type="submit">Sair</button>
                         </form>
                     </div>
