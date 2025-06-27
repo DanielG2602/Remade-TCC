@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `AcervoRct`.`Receita` (
   `nome_rct` VARCHAR(50) NOT NULL COMMENT 'Nome da receita. Exemplo: Bolo de Cenoura',
   `dt_criacao` DATE NOT NULL COMMENT 'Data da criação da receita pelo cozinheiro',
   `cozinheiro` INT NOT NULL COMMENT 'ID do cozinheiro responsável pela receita',
-  `preparo` VARCHAR(5000) NOT NULL COMMENT 'Modo de preparo da receita',
+  `preparo` TEXT NOT NULL COMMENT 'Modo de preparo da receita',
   `quantidade_porcao` DECIMAL(3,1) NOT NULL COMMENT 'Quantidade de porções da receita. Exemplo: 2.0',
   `ind_rec_inedita` CHAR(1) NOT NULL COMMENT 'Indicador de receita inédita. Ex: S = Sim, N = Não',
   PRIMARY KEY (`nome_rct`, `cozinheiro`),
@@ -89,7 +89,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Ingrediente` (
   `idIngrediente` INT NOT NULL AUTO_INCREMENT COMMENT 'Identificação do ingrediente. Exemplo: 0001 - Açúcar',
   `nome` VARCHAR(45) NOT NULL COMMENT 'Nome do ingrediente utilizado nas receitas. Exemplo: Açúcar',
-  `descricao` VARCHAR(1000) NULL COMMENT 'Descrição do ingrediente. Exemplo: Removido da folha de uma árvore...',
   PRIMARY KEY (`idIngrediente`)
 )
 ENGINE = InnoDB;
@@ -101,7 +100,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AcervoRct`.`Medida` (
   `idMedida` INT NOT NULL COMMENT 'Identificador da medida. Exemplo: 00001 - Copo',
-  `descricao` VARCHAR(45) NOT NULL COMMENT 'Descrição da medida. Exemplo: Copo',
+  `nomeMedida` VARCHAR (50) NOT NULL,
   PRIMARY KEY (`idMedida`)
 )
 ENGINE = InnoDB;
@@ -180,7 +179,10 @@ CREATE TABLE IF NOT EXISTS `AcervoRct`.`Receita_e_Ingrediente` (
 )
 ENGINE = InnoDB;
 
-
+CREATE TABLE IF NOT EXISTS `AcervoRct`.`IngredienteMedido`(
+  `idIngredienteMedido`
+)
+ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `AcervoRct`.`Restaurante`
 -- -----------------------------------------------------

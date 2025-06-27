@@ -3,10 +3,10 @@
 function conn()
 {
     $host = "localhost"; 
-    $port = "3306"; 
+    $port = "3307"; 
     $dbname = "acervorct"; 
     $usuario = "root"; 
-    $senha = ""; 
+    $senha = "";
 
     try {
         $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";

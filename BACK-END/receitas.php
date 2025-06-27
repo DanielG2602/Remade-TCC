@@ -1,7 +1,4 @@
-<<?php
-
-// 1. Incluir o arquivo de conexão com o banco de dados
-// Ele contém a função conn() que retorna um objeto PDO
+<?php
 require_once 'conexao.php'; // Ajuste o caminho se necessário
 
 // 2. Chamar a função conn() para obter o objeto PDO
