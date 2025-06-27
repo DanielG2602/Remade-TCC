@@ -11,12 +11,12 @@
     <div class="form-container">
       <h2>Recupere a sua Senha</h2>
       <p>Abaixo informe sua nova senha</p>
-      <form>
-        <label for="nova-senha">Nova Senha</label>
-        <input type="password" id="nova-senha" placeholder="Senha" required>
+      <form action="../../BACK-END/ADM/recuperarSenha.php" method="POST">
+        <label for="Email">Informe seu email</label>
+        <input type="email" id="email" placeholder="email" required>
 
-        <label for="confirma-senha">Confirme sua Nova Senha</label>
-        <input type="password" id="confirma-senha" placeholder="Senha" required>
+        <label for="confirma-senha">Informe sua Nova Senha</label>
+        <input type="password" id="senha" placeholder="senha" required>
 
         <div class="buttons">
           <button type="button" class="cancel">Cancelar</button>
