@@ -1,11 +1,20 @@
+<?php
+// Inclui o arquivo de conexão com o banco de dados.
+// É crucial que o caminho esteja correto para seu projeto.
+// Supondo que 'telaLivros.php' está em 'FRONT-END/' e 'conexao.php' em 'BACK-END/',
+// o caminho relativo correto é '../../BACK-END/conexao.php'.
+include_once '../../BACK-END/conexao.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Gerenciar Livros</title> <link rel="stylesheet" href="../css/telaLivros.css" />
+    <title>Gerenciar Livros</title>
+    <link rel="stylesheet" href="../css/telaLivros.css" />
     <style>
-        /* Basic styles for the new buttons for quick visualization */
+        /* Estilos básicos adicionados para visualização rápida dos botões e cards */
         .action-button {
             display: inline-block;
             padding: 8px 12px;
@@ -18,26 +27,148 @@
             font-size: 0.9em;
             text-align: center;
         }
-        .add-button { background-color: #28a745; } /* Green */
-        .edit-button { background-color: #007bff; } /* Blue */
-        .delete-button { background-color: #dc3545; } /* Red */
+        .add-button { background-color: #28a745; } /* Verde para adicionar */
+        .edit-button { background-color: #007bff; } /* Azul para editar */
+        .delete-button { background-color: #dc3545; } /* Vermelho para excluir */
         .add-new-button {
             margin-bottom: 20px;
             padding: 10px 20px;
             font-size: 1em;
         }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Espaço entre os cards */
+            justify-content: center; /* Centraliza os cards */
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 300px; /* Largura fixa para os cards */
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .image-placeholder {
+            background-color: #f0f0f0;
+            height: 150px; /* Altura de exemplo para o placeholder */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 1.2em;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .card-content {
+            padding: 15px;
+            flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
+        }
+        .card-content h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            color: #333;
+        }
+        .card-content p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .card-actions {
+            display: flex;
+            justify-content: space-around; /* Distribui os botões uniformemente */
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+        }
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+        .navbar li {
+            padding: 0 15px;
+        }
+        .navbar a, .navbar button {
+            color: white;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover, .navbar button:hover {
+            background-color: #555;
+        }
+        .navbar .divider {
+            color: #777;
+        }
+        .main-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .main-content h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .main-content p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .dot {
+            height: 10px;
+            width: 10px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .dot.active {
+            background-color: #717171;
+        }
     </style>
 </head>
 <body>
     <header class="navbar">
-        <button>LIVROS</button>
-        <button>RECEITAS</button>
-        <button>FUNCIONARIOS</button>
-        <button>CHEFES DE COZINHAS</button>
-        <div class="dropdown">
-            <button>RESTAURANTES ▼</button>
-        </div>
-        <button class="usuario">USUÁRIO</button>
+        <nav>
+            <ul>
+                <li><a href="telaLivros.php">Livros</a></li>
+                <li><a href="FormReceitas.php">Receitas</a></li>
+                <li><a href="FormFuncionario.php">Funcionários</a></li>
+                <li><a href="GerenciarCargos.php">Cargos</a></li>
+                <li class="divider">|</li>
+                <li><a href="ListarRestaurante.php">Restaurantes</a></li>
+                <li><button class="btn-user">USUÁRIO</button></li>
+            </ul>
+        </nav>
     </header>
 
     <main class="main-content">
@@ -48,32 +179,33 @@
 
         <div class="card-container">
             <?php
-            include_once '../../BACK-END/conexao.php'; 
-
             try {
-             
+
+                $pdo = conn();
                 $sql = "SELECT idLivro, titulo, isbn FROM Livro ORDER BY titulo ASC";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
 
-
                 $livros = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
                 if ($livros) {
+    
                     foreach ($livros as $livro) {
                         ?>
                         <div class="card">
                             <div class="image-placeholder">
-                                </div>
+                                Imagem do Livro
+                            </div>
                             <div class="card-content">
                                 <h2><?php echo htmlspecialchars($livro['titulo']); ?></h2>
                                 <p>ISBN: <?php echo htmlspecialchars($livro['isbn'] ?? 'N/A'); ?></p>
 
                                 <div class="card-actions">
-                                    <a href="formLivro.php?id=<?php echo htmlspecialchars($livro['idLivro']); ?>" class="action-button edit-button">Editar</a>
+                                    <a href="formLivros.php?id=<?php echo htmlspecialchars($livro['idLivro']); ?>" class="action-button edit-button">Editar</a>
                                     <a href="../../BACK-END/excluir_livro.php?id=<?php echo htmlspecialchars($livro['idLivro']); ?>"
                                        class="action-button delete-button"
                                        onclick="return confirm('Tem certeza que deseja excluir o livro: <?php echo htmlspecialchars($livro['titulo']); ?>?');">
-                                       Excluir
+                                        Excluir
                                     </a>
                                     <a href="avaliarLivro.php?id=<?php echo htmlspecialchars($livro['idLivro']); ?>" class="action-button">Avaliar →</a>
                                 </div>
@@ -86,15 +218,16 @@
                 }
 
             } catch (PDOException $e) {
-                echo '<p style="color: red;">Erro ao carregar os livros: ' . htmlspecialchars($e->getMessage()) . '</p>';
+            
+                error_log("Erro ao carregar os livros: " . $e->getMessage());
+                echo '<p style="color: red;">Erro ao carregar os livros. Por favor, tente novamente mais tarde.</p>';
             }
             ?>
         </div>
-
         <div class="dots">
             <span class="dot active"></span>
             <span class="dot"></span>
-        </div>
+            </div>
     </main>
     <script src="script.js"></script>
 </body>
