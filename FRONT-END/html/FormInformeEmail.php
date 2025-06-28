@@ -16,7 +16,7 @@
         <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
 
         <div class="buttons">
-          <button type="button" class="cancel" onclick="window.location.href='sua-pagina-de-login.html'">Cancelar</button>
+          <button type="button" class="cancel" onclick="window.location.href='./FormLogin.php'">Cancelar</button>
           <button type="submit" class="submit">Enviar Link</button>
         </div>
       </form>

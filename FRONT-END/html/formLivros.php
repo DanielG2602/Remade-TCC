@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/FormLivros.css" /> <title>Cadastro/Edição de Livro</title>
+    <link rel="stylesheet" href="../css/FormCargos.css" /> <title>Cadastro/Edição de Livro</title>
     <style>
 </style>
 </head>
@@ -20,31 +20,20 @@
             </ul>
         </nav>
     </header>
-
     <main>
-        <div class="form-container">
-            <h2><?php echo $form_title; ?></h2>
+    <form action="../../BACK-END/livros.php" method="GET">
+      <h2>Cadastro de Livros</h2>
 
-            <form action="../../BACK-END/processar_livro.php" method="POST">
-                <?php if ($idLivro): ?>
-                    <input type="hidden" name="idLivro" value="<?php echo htmlspecialchars($idLivro); ?>" />
-                <?php endif; ?>
+      <label for="Titulo">Titulo do livro:</label>
+      <input type="text" name="Titulo" id="Titulo" placeholder="Digite o título do livro" required />
 
-                <label for="titulo">Título do Livro:</label>
-                <input type="text" name="titulo" id="titulo"
-                       placeholder="Digite o título do livro"
-                       value="<?php echo htmlspecialchars($titulo); ?>" required />
-                <label for="isbn">ISBN:</label>
-                <input type="text" name="isbn" id="isbn"
-                       placeholder="Digite o ISBN do livro"
-                       value="<?php echo htmlspecialchars($isbn); ?>" />
-
-                <div class="botoes">
-                    <button type="button" class="cancelar"><a href="telaLivros.php">Cancelar</a></button>
-                    <button type="submit" class="confirmar"><?php echo $form_action_text; ?></button>
-                </div>
-            </form>
-        </div>
-    </main>
+      <label for="Isbn">Descrição do Livro:</label>
+      <input type="text" name="Isbn" id="Isbn" placeholder="Descreva o livro" required />
+      <div class="botoes">
+        <button type="button" class="cancelar"><a href="FormLivros.php">cancelar</a></button>
+        <button type="submit" class="confirmar"><a href="" </button>>Criar</a></button>
+      </div>
+    </form>
+  </main>
 </body>
 </html>
