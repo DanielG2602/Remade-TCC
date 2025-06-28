@@ -10,12 +10,11 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#">Livros</a></li>
-                <li><a href="#">Receitas</a></li>
+                <li><a href="telaLivros.php">Livros</a></li> <li>
                 <li><a href="#">Funcionários</a></li>
                 <li><a href="#">Chefes de Cozinha</a></li>
                 <li class="divider">|</li>
-                <li><a href="restaurantes.php">Restaurantes</a></li>
+                <li><a href="#">Restaurantes</a></li>
                 <li><button class="btn-user">USUÁRIO</button></li>
             </ul>
         </nav>
