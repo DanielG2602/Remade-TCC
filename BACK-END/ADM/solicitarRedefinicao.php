@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($usuario) {
         $idUsuario = $usuario['id'];
-        $nomeUsuario = $usuario['nome'];
+        $nomeUsuario = $usuario['nomeUser'];
 
         $token = bin2hex(random_bytes(32)); 
         $expiraEm = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token expira em 1 hora

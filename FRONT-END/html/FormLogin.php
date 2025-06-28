@@ -26,6 +26,7 @@ if (isset($_SESSION['usuario_id'])) {
 </head>
 <body>
     <main>
+        
         <div id="lado_esquerdo"></div>
         <div id="lado_direito">
             <form action="../../BACK-END/ADM/ValidaUsuario.php" method="post">
@@ -47,7 +48,7 @@ if (isset($_SESSION['usuario_id'])) {
                 </label>
 
                 <div class="botoes">
-                    <button type="button" class="esqueceu-senha"><a href="./FormEsqueceuSenha.php">Esqueceu sua Senha?</a> </button>
+                    <button type="button" class="esqueceu-senha"><a href="./FormInformeEmail.php">Esqueceu sua Senha?</a> </button>
                     <button type="submit" class="conectar">Conecta-se</button>
 
                     <div class="nao-tem-conta"> <p>Não tem uma conta?</p>

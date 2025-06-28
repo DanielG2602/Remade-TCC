@@ -180,7 +180,10 @@ CREATE TABLE IF NOT EXISTS `AcervoRct`.`Receita_e_Ingrediente` (
 )
 ENGINE = InnoDB;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a9c1eb959f6c863e0ed1c20c3c978df581026fe4
 -- -----------------------------------------------------
 -- Table `AcervoRct`.`Restaurante`
 -- -----------------------------------------------------
@@ -293,7 +296,18 @@ CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
+    nomeUser VARCHAR(50) NOT NULL,
+    nivel_acesso varchar(50) NOT NULL,
     data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE redefinicao_senhas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token VARCHAR(255) UNIQUE NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
 
