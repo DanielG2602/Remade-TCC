@@ -6,10 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["idCargo"])) {
     $id = $_POST["idCargo"];
 
     // Se quiser fazer exclusão lógica (marcar inativo)
-    $sql = "UPDATE Cargo SET ind_ativo = 0 WHERE idCargo = :idCargo";
+    // $sql = "UPDATE cargo SET ind_ativo = 0 WHERE idCargo = :idCargo";
 
     // Se quiser exclusão física (DELETE), use:
-    // $sql = "DELETE FROM Cargo WHERE idCargo = :idCargo";
+    $sql = "DELETE FROM Cargo WHERE idCargo = :idCargo";
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':idCargo', $id, PDO::PARAM_INT);

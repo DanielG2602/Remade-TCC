@@ -1,64 +1,47 @@
-<?php
-require_once 'conexao.php'; // Ajuste o caminho se necessário
+<?php 
+include_once './conexao.php';
 
-// 2. Chamar a função conn() para obter o objeto PDO
-try {
-    $pdo = conn(); // Agora $pdo é seu objeto de conexão PDO
-    // Remova a linha "Conexão bem-sucedida!" do conexao.php para não poluir a saída.
-} catch (PDOException $e) {
-    die("Erro crítico: Não foi possível obter a conexão PDO. " . $e->getMessage());
-}
-
-// 3. Processar Dados do Formulário
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $nome_chefe = isset($_GET['nome_chefe']) ? $_GET['nome_chefe'] : '';
-    $restaurante = isset($_GET['restaurante']) ? $_GET['restaurante'] : '';
-    $nome_livro = isset($_GET['nome_livro']) ? $_GET['nome_livro'] : '';
-    $data_criacao = isset($_GET['data_criacao']) ? $_GET['data_criacao'] : '';
-    $ingredientes = isset($_GET['ingredientes']) ? $_GET['ingredientes'] : '';
-    $modo_preparo = isset($_GET['modo_preparo']) ? $_GET['modo_preparo'] : '';
-    $descricao = isset($_GET['descricao']) ? $_GET['descricao'] : '';
-
-    // 4. Preparar e Executar a Instrução SQL de Inserção (Usando Prepared Statements com PDO)
-    $sql = "INSERT INTO receitas (nome_chefe, restaurante, nome_livro, data_criacao, ingredientes, modo_preparo, descricao) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
     try {
-        $stmt = $pdo->prepare($sql); // Usando $pdo->prepare()
+        $conn = conn();
 
-        // Vincula os parâmetros à instrução preparada
-        // PDO usa bindValue ou bindParam, não 'sssssss'
-        $stmt->bindValue(1, $nome_chefe);
-        $stmt->bindValue(2, $restaurante);
-        $stmt->bindValue(3, $nome_livro);
-        $stmt->bindValue(4, $data_criacao);
-        $stmt->bindValue(5, $ingredientes);
-        $stmt->bindValue(6, $modo_preparo);
-        $stmt->bindValue(7, $descricao);
-
-        // Executa a instrução preparada
-        if ($stmt->execute()) {
-            echo "Receita cadastrada com sucesso!";
-            // Opcional: Redirecionar
-            // header("Location: ../../Frontend/pages/receitas_lista.php?status=success");
-            // exit();
-        } else {
-            echo "Erro ao cadastrar receita: " . implode(" - ", $stmt->errorInfo());
+        if (!isset($_FILES['foto']) || $_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
+            header("Location: ../FRONT-END/html/FormReceita.php?status=erro&msg=upload_invalido");
+            exit();
         }
 
-        // Fechar a instrução preparada (opcional, PDO libera automaticamente na destruição)
-        $stmt = null;
+        $foto = file_get_contents($_FILES['foto']['tmp_name']);
+        $nomeReceita = $_POST["nomeReceita"];
+        $categoria = $_POST["categoria"];
+        $dataCriacao = $_POST["dataCriacao"];
+        $ingredientes = $_POST["ingredientes"];
+        $preparo = $_POST["preparo"];
+
+        $string = implode(',', $ingredientes);
+
+        $sql = "INSERT INTO receitanovo (nomeReceita, dataCriacao, ingredientes, preparo, categoria, foto) VALUES (:nomeReceita, :dataCriacao, :ingredientes, :preparo, :categoria, :foto)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':nomeReceita', $nomeReceita);
+        $stmt->bindValue(':dataCriacao', $dataCriacao);
+        $stmt->bindValue(':ingredientes', $string);
+        $stmt->bindValue(':preparo', $preparo);
+        $stmt->bindValue(':categoria', $categoria);
+        $stmt->bindValue(':foto', $foto, PDO::PARAM_LOB);
+
+        $stmt->execute();
+
+        header("Location: ../FRONT-END/html/ListarReceitas.php?status=sucesso&msg=Receita_cadastrada");
+        exit();
 
     } catch (PDOException $e) {
-        die("Erro na operação do banco de dados: " . $e->getMessage());
+        error_log("Erro PDO ao inserir receita: " . $e->getMessage());
+        header("Location: ../FRONT-END/html/FormReceita.php?status=erro&msg=erro_db&details=" . urlencode($e->getMessage()));
+        exit();
     }
 
 } else {
-    echo "Método de requisição inválido. Por favor, utilize o formulário de cadastro.";
+    header("Location: ../FRONT-END/html/FormReceita.php");
+    exit();
 }
-
-// 5. Fechar a Conexão com o Banco de Dados
-// Em PDO, a conexão é geralmente fechada definindo o objeto PDO como null.
-$pdo = null;
-
 ?>
-

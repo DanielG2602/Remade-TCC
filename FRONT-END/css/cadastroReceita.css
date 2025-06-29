@@ -177,3 +177,8 @@ button.confirmar {
 button.confirmar:hover {
     background-color: #163b5d;
 }
+
+select #ingredientes{
+    height: auto;
+    min-height: 100px;
+}

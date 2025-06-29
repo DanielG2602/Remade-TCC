@@ -49,7 +49,7 @@ $cargos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="submit" value="Buscar">
                 </form>
             </div>
-            <button class="add-button">ADICIONAR CARGO</button>
+            <button class="add-button"><a href="./FormCargos.php">ADD CARGO</a></button>
         </div>
 
         <table>

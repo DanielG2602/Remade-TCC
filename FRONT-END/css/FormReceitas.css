@@ -135,3 +135,7 @@
     background-color: #163b5d;
   }
   
+  #ingredientes{
+    height: auto;
+    min-height: 100px;
+  }

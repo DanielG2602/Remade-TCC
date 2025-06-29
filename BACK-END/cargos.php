@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $sql = "INSERT INTO cargo (nomeCargo, DescCargo, data_inicio, ind_ativo)
+        $sql = "INSERT INTO cargo (nomeCargo, descricao, data_inicio, ind_ativo)
                 VALUES (:nomeCargo, :descricao, :data_inicio, :ind_ativo)";
 
         $stmt = $pdo->prepare($sql);
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':ind_ativo' => $ind_ativo_value
         ]);
 
-        header("Location: ../FRONT-END/html/GerenciarCargos.php?status=sucesso&msg=cargo_cadastrado");
+        header("Location: ../FRONT-END/html/ListarCargos.php?status=sucesso&msg=cargo_cadastrado");
         exit();
 
     } catch(PDOException $e){
