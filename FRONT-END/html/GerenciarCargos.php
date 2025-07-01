@@ -13,11 +13,11 @@
     <header>
         <nav>
             <ul class="menu">
+        
                 <li><a href="./index.php">RCBR</a></li>
                 <li><a href="./telaLivros.php">Livros</a></li>
-                <li><a href="#">Receitas</a></li>
-                <li><a href="GerenciarCargos.php">Cargos</a></li>
-                <li><a href="#">Funcionários</a></li>
+                <li><a href="FormReceitas.php">Receitas</a></li>
+                <li><a href="FormFuncionario.php">Funcionários</a></li>
                 <li class="menu-right"><a href="./ListarRestaurantes.php">Restaurantes</a></li>
                 <li class="user-section">
                     <span class="user-name">USUARIO</span>

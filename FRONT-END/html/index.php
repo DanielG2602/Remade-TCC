@@ -11,7 +11,7 @@
         <nav>
             <ul>
                 <li><a href="index.php">RCBR</a></li>
-                <li><a href="#">Receitas</a></li>
+                <li><a href="FormReceitas.php">Receitas</a></li>
                 <li><a href="./GerenciarCargos.php">Cargos</a></li>
                 <li><a href="./ListarFuncionarios.php">Funcionarios</a></li>
                 <li class="divider">|</li>
