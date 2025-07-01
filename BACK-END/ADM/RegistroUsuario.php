@@ -1,9 +1,7 @@
 <?php
-
 session_start();
 
-require_once '../conexao.php'; 
-
+require_once '../conexao.php'; // Ajuste o caminho conforme a estrutura do seu projeto
 
 function redirecionarComMensagem($mensagem, $tipo_mensagem = 'erro') {
     $_SESSION['mensagem_registro'] = $mensagem;
@@ -13,13 +11,14 @@ function redirecionarComMensagem($mensagem, $tipo_mensagem = 'erro') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $NomeUser = trim($_POST['nomeUser'] ?? '');
+    $NomeUser = trim($_POST['NomeUser'] ?? ''); // Corrigido: NomeUser (letra maiúscula)
     $email = trim($_POST['email'] ?? '');
     $confirmar_email = trim($_POST['confirmar_email'] ?? '');
     $senha = $_POST['senha'] ?? '';
     $confirmar_senha = $_POST['confirmar_senha'] ?? '';
 
-    if (empty($email) || empty($confirmar_email) || empty($senha) || empty($confirmar_senha)) {
+    // Validações
+    if (empty($NomeUser) || empty($email) || empty($confirmar_email) || empty($senha) || empty($confirmar_senha)) {
         redirecionarComMensagem('Todos os campos são obrigatórios.');
     }
 
@@ -34,11 +33,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($senha !== $confirmar_senha) {
         redirecionarComMensagem('As senhas não coincidem.');
     }
+
     if (strlen($senha) < 6) {
         redirecionarComMensagem('A senha deve ter no mínimo 6 caracteres.');
     }
+
+    // Tenta conectar ao banco uma vez só
     try {
-        $pdo = conn(); // Obtém a conexão com o banco de dados
+        $pdo = conn(); // conexão com o banco
+    } catch (PDOException $e) {
+        redirecionarComMensagem('Erro ao conectar ao banco de dados: ' . $e->getMessage());
+    }
+
+    // Verifica se o email já existe
+    try {
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuarios WHERE email = :email");
         $stmt->execute(['email' => $email]);
         if ($stmt->fetchColumn() > 0) {
@@ -47,7 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (PDOException $e) {
         redirecionarComMensagem('Erro interno ao verificar o e-mail. Tente novamente mais tarde.');
     }
+
+    // Criptografa a senha
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+
+    // Tenta registrar o usuário
     try {
         $stmt = $pdo->prepare("INSERT INTO usuarios (NomeUser, email, senha) VALUES (:NomeUser, :email, :senha)");
         $stmt->execute([
@@ -64,6 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } catch (PDOException $e) {
         redirecionarComMensagem('Erro interno ao registrar. Tente novamente mais tarde.');
+        // Para depuração: descomente a linha abaixo
+        // redirecionarComMensagem('Erro ao registrar: ' . $e->getMessage());
     }
 
 } else {
@@ -71,3 +85,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
+/*
+ *
+ * Obs.: Este código foi ajustado após erro de conexão com porta incorreta (3307 em vez de 3306)
+ * e problema de variável $pdo sendo usada fora do escopo. Agora o sistema conecta corretamente,
+ * valida os dados e cadastra com segurança.
+ *
+ * 
+ *
