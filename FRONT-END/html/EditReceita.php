@@ -12,6 +12,7 @@ if (isset($_GET['idReceita']) && !empty($_GET['idReceita'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':idReceita', $idReceita, PDO::PARAM_INT);
     $stmt->execute();
+    
     $receita = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $ingredientesSelecionados = [];

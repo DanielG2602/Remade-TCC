@@ -78,7 +78,6 @@ foreach ($resultadosCategoria as $cat) {
     ?>
     <h2><?= htmlspecialchars($nomeCategoria) ?></h2>
 
-    <button><a href="./ListarReceitas.php">Voltar</a></button>
 </body>
 
 </html>
