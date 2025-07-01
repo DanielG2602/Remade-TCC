@@ -26,7 +26,7 @@ $username_display = $is_logged_in ? htmlspecialchars($_SESSION['usuario_email'])
                 <li><a href="index.php">RCBR</a></li>
                 <li><a href="FormReceitas.php">Receitas</a></li>
                 <li><a href="./GerenciarCargos.php">Cargos</a></li> <li><a href="./ListarFuncionarios.php">Funcionarios</a></li> <li class="divider">|</li>
-                <li><a href="./ListarRestaurantes.php">Restaurantes</a></li>
+                <li><a href="./ListarRestaurante.php">Restaurantes</a></li>
 
                 <li class="user-section">
                     <?php if ($is_logged_in): // Se o usuário está logado ?>
@@ -59,7 +59,7 @@ $username_display = $is_logged_in ? htmlspecialchars($_SESSION['usuario_email'])
                     </p>
                     <div class="botoes">
                         <button class="btn-azul"><a href="telaLivros.php">VISUALIZAR LIVROS</a></button>
-                        <button class="btn-azul"><a href="RegistrarLivro.php">REGISTRAR LIVRO</a></button>
+                        <button class="btn-azul"><a href="formLivros.php">REGISTRAR LIVRO</a></button>
                     </div>
                 </div>
                 <div id="ladoDireito"></div>

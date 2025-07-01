@@ -10,10 +10,9 @@
     <header>
         <nav class="navbar">
             <ul>
-                <li><a href="#">LIVROS</a></li>
-                <li><a href="#">RECEITAS</a></li>
-                <li><a href="#">CARGOS</a></li>
-                <li><a href="#">FUNCIONÁRIOS</a></li>
+                <li><a href="./telaLivros.php">LIVROS</a></li>
+                <li><a href="./ListarCargos.php">CARGOS</a></li>
+                <li><a href="./ListarFuncionarios.php">FUNCIONÁRIOS</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">RESTAURANTES</a>
                 </li>
@@ -42,24 +41,24 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>PIZZAR MAR</td>
-                    <td>MATHEUS</td>
-                    <td>CLÁSSICO</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>BURGKING</td>
-                    <td>PEDRO</td>
-                    <td>CASUAL OU FAMILIAR</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>GIRRAFAS</td>
-                    <td>DAVI</td>
-                    <td>SELF-SERVICE</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>PETISCOS DO MAR</td>
-                    <td>DANIEL</td>
-                    <td>CASUAL OU FAMILIAR</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>

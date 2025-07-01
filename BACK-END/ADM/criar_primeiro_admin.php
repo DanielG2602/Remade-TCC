@@ -3,9 +3,9 @@
 
 require_once '../conexao.php'; // Ajuste o caminho para o seu arquivo de conexão
 
-$email_admin = 'Bossadm@gmail.com'; // 
-$senha_admin_texto_puro = 'dagdhafhafhafagfa7'; 
-$role_admin = 'admin'; // Não mude este valor, a menos que sua coluna 'role' use outro nome para admin
+$email_admin = 'Bossadm1@gmail.com'; // 
+$senha_admin_texto_puro = '272dagdhafhafhafagfa7'; 
+$role_admin = 'admin'; 
 
 try {
     $pdo = conn(); 
@@ -23,8 +23,7 @@ try {
 
     
     $hash_senha = password_hash($senha_admin_texto_puro, PASSWORD_DEFAULT);
-
-   
+    
     $stmt_insert = $pdo->prepare("INSERT INTO `usuarios` (email, senha, role) VALUES (:email, :senha, :role)");
     $stmt_insert->bindParam(':email', $email_admin, PDO::PARAM_STR);
     $stmt_insert->bindParam(':senha', $hash_senha, PDO::PARAM_STR);

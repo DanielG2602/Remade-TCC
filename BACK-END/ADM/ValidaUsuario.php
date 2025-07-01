@@ -4,7 +4,7 @@
 if (session_status() === PHP_SESSION_NONE) { // Verifica se a sessão já não está ativa
     session_start();
 }
-require_once __DIR__ . '/../../conexao.php';
+require_once './conexao.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');

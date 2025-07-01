@@ -190,7 +190,7 @@ include_once '../../BACK-END/conexao.php';
           <div class="card">
             <div class="image-placeholder">Imagem do Livro</div>
             <div class="card-content">
-              <h2><?= htmlspecialchars($livro['titulo']) ?></h2>
+              <h2><?= htmlspecialchars($idlivro['titulo']) ?></h2>
               <p>ISBN: <?= htmlspecialchars($livro['isbn'] ?? 'N/A') ?></p>
               <div class="card-actions">
                 <a href="formLivros.php?id=<?= $livro['idLivro'] ?>" class="action-button edit-button">Editar</a>

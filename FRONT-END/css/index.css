@@ -1,4 +1,4 @@
-/* General Body Styles */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,7 +6,6 @@ body {
     color: #333;
 }
 
-/* Header and Navigation */
 header {
     background-color: #0c2040; /* Dark blue from the image */
     padding: 0;
@@ -19,12 +18,12 @@ nav ul {
     display: flex; /* Arrange items horizontally */
     align-items: center; /* Vertically align items */
     justify-content: flex-start; /* Start from the left */
-    height: 60px; /* Height of the navigation bar */
+    height: 60px; 
 }
 
 nav ul li {
     padding: 0 15px;
-    position: relative; /* For dropdown */
+    position: relative; 
 }
 
 nav ul li a {
@@ -36,7 +35,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #cccccc; /* Slightly lighter white on hover */
+    color: #cccccc; 
 }
 
 .divider {
@@ -152,7 +151,7 @@ main {
 }
 
 .btn-azul {
-    background-color: #10375C; /* A shade of blue similar to the image */
+    background-color: #ffffff; /* A shade of blue similar to the image */
     color: white;
     padding: 12px 25px;
     border: none;
