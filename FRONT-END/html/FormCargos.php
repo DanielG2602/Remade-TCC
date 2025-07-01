@@ -10,6 +10,7 @@
   <header>
     <nav>
       <ul>
+        <li><a href="./index.php">RCBR</a></li>
         <li><a href="telaLivros.php">Livros</a></li>
         <li><a href="FormReceitas.php">Receitas</a></li>
         <li><a href="FormFuncionario.php">Funcionários</a></li>
