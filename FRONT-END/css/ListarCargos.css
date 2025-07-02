@@ -1,42 +1,98 @@
-body {
-    font-family: Arial, sans-serif;
+/* Path: ../css/ListarCargos.css */
+
+* {
     margin: 0;
     padding: 0;
-    color: #333;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif; /* Usando a fonte padrão que você usou antes */
 }
 
+html, body {
+    height: 100%;
+    background-color: #f2f2f2; /* Cor de fundo geral do corpo */
+    color: #333; /* Cor de texto padrão */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- ESTILOS DA NAVBAR (AGORA COM CORES DO MODELO - FUNDO PRETO, TEXTO BRANCO) --- */
 header {
-    background-color: #f8f8f8;
-    border-bottom: 2px solid #ccc;
+    background-color: #222; /* Fundo PRETO para a navbar, como no seu modelo formReceitas */
+    border-bottom: 1px solid #000; /* Borda inferior preta escura */
+    color: white; /* Cor do texto padrão para elementos dentro do header (ex: RCBR) */
+    padding: 0.8rem 0; /* Espaçamento interno da barra */
 }
 
-.navbar ul {
+nav.navbar ul { /* Mantendo a classe .navbar se você a usa no HTML */
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: flex; /* Garante que os itens fiquem lado a lado */
+    justify-content: space-around; /* Distribui os itens uniformemente */
+    align-items: center; /* Alinha verticalmente */
 }
 
-.navbar ul li a {
+nav.navbar ul li {
+    white-space: nowrap; /* Evita quebra de linha em itens curtos */
+}
+
+nav.navbar ul li a {
     text-decoration: none;
-    color: #000;
-    font-weight: bold;
-    padding: 10px 20px;
-    display: block;
+    color: white; /* Links BRANCOS para o fundo preto */
+    font-weight: 500; /* Peso da fonte */
+    transition: color 0.3s, background-color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
 }
 
-.navbar ul .user a {
-    background-color: #00264d;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 15px;
+nav.navbar ul li a:hover {
+    color: #ddd; /* Cor do link no hover (cinza claro) */
+    background-color: #333; /* Fundo um pouco mais claro no hover */
+}
+
+/* Estilo para o item ativo na navbar (se você usar a classe "active" no HTML) */
+nav.navbar ul li a.active {
+    color: #4CAF50; /* Um verde de destaque, por exemplo */
+    font-weight: bold;
+}
+
+.divider {
+    color: #888; /* Cor do divisor (cinza médio) */
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.btn-user {
+    background-color: #1f4e79; /* Mantendo a cor do botão USUÁRIO do seu código anterior */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-user:hover {
+    background-color: #163b5d;
+}
+/* --- FIM DOS ESTILOS DA NAVBAR --- */
+
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
 }
 
 h1 {
     text-align: center;
-    color: #00264d;
+    color: #1f4e79;
     margin: 20px 0;
 }
 
@@ -44,6 +100,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     width: 80%;
+    max-width: 1000px;
     margin: 20px auto;
 }
 
@@ -52,15 +109,16 @@ h1 {
     align-items: center;
 }
 
-.search-container input {
+.search-container input[type="text"] {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px 0 0 5px;
     width: 300px;
+    background-color: #f9f9f9;
 }
 
-.search-container button {
-    background-color: #00264d;
+.search-container input[type="submit"] {
+    background-color: #1f4e79;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -69,7 +127,7 @@ h1 {
 }
 
 .add-button {
-    background-color: #00264d;
+    background-color: #1f4e79;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -78,36 +136,61 @@ h1 {
     align-self: flex-end;
 }
 
+.add-button a {
+    text-decoration: none;
+    color: inherit;
+}
+
 table {
     width: 80%;
+    max-width: 1000px;
     margin: 20px auto;
     border-collapse: collapse;
     text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 table th, table td {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     padding: 10px;
 }
 
 table thead {
-    background-color: #00264d;
+    background-color: #1f4e79;
     color: #fff;
 }
 
-.status-button {
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td button {
+    padding: 8px 12px;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
-    color: #fff;
-    font-weight: bold;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-.status-button.active {
-    background-color: #00264d;
+table td button[type="button"] { /* Botão Atualizar */
+    background-color: #007bff;
+    color: white;
 }
 
-.status-button.inactive {
-    background-color: #00264d;
+table td button[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+table td button[type="submit"] { /* Botão Excluir */
+    background-color: #dc3545;
+    color: white;
+}
+
+table td button[type="submit"]:hover {
+    background-color: #c82333;
 }

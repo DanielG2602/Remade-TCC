@@ -25,7 +25,8 @@ $username_display = $is_logged_in ? htmlspecialchars($_SESSION['usuario_email'])
             <ul>
                 <li><a href="index.php">RCBR</a></li>
                 <li><a href="FormReceitas.php">Receitas</a></li>
-                <li><a href="./GerenciarCargos.php">Cargos</a></li> <li><a href="./ListarFuncionarios.php">Funcionarios</a></li> <li class="divider">|</li>
+                <li><a href="ListarCargos.php">Cargos</a></li> <li>
+                <a href="./ListarFuncionarios.php">Funcionarios</a></li> <li class="divider">|</li>
                 <li><a href="./ListarRestaurante.php">Restaurantes</a></li>
 
                 <li class="user-section">
