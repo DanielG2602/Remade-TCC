@@ -264,6 +264,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `data_registro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `role` varchar(10) COLLATE utf8mb4_general_ci DEFAULT 'user',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
