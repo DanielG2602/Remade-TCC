@@ -1,32 +1,6 @@
 <?php
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $nome_restaurante = $_POST['nome'] ?? '';
-    $gerente_restaurante = $_POST['gerente'] ?? '';
-    $menu_restaurante = $_POST['menu'] ?? '';
-
-    // Em um ambiente real, você faria o seguinte:
-    // 1. Validar os dados recebidos (ex: verificar se não estão vazios, formato correto, etc.).
-    // 2. Conectar-se ao banco de dados.
-    // 3. Preparar e executar uma instrução SQL INSERT para adicionar o novo restaurante.
-    //    Exemplo (usando PDO):
-    //    $stmt = $pdo->prepare("INSERT INTO restaurantes (nome, gerente, menu) VALUES (:nome, :gerente, :menu)");
-    //    $stmt->execute([
-    //        ':nome' => $nome_restaurante,
-    //        ':gerente' => $gerente_restaurante,
-    //        ':menu' => $menu_restaurante
-    //    ]);
-    // 4. Verificar se a inserção foi bem-sucedida.
-
-    // Simulação de salvamento e feedback para o usuário
-    echo "<script>alert('Restaurante \\\"" . htmlspecialchars($nome_restaurante) . "\\\" adicionado com sucesso (simulação)!');</script>";
-
-    // Redireciona o usuário de volta para a página de listagem de restaurantes
-    // É importante usar exit() após header() para garantir que o script pare de ser executado
-    echo "<script>window.location.href = 'listar_restaurantes.php';</script>";
-    exit();
-}
+// Não há PHP complexo aqui, apenas HTML para o formulário
+// que será enviado para ../../BACK-END/restaurante.php
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -143,15 +117,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="nome" name="nome" required>
             </div>
             <div>
-                <label for="gerente">Gerente:</label>
-                <input type="text" id="gerente" name="gerente" required>
+                <label for="contato">Contato:</label> <input type="text" id="contato" name="contato" required>
             </div>
             <div>
-                <label for="menu">Menu:</label>
-                <input type="text" id="menu" name="menu" required>
+                <label for="telefone">Telefone:</label> <input type="text" id="telefone" name="telefone" required>
             </div>
             <button type="submit">Adicionar Restaurante</button>
-            <a href="./listarRestaurantes.php" class="back-link">Cancelar</a>
+            <a href="listar_restaurantes.php" class="back-link">Cancelar</a>
         </form>
     </div>
 

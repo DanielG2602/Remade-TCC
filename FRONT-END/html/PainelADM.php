@@ -1,19 +1,10 @@
 <?php
-// Certifique-se que session_start() é chamado UMA ÚNICA VEZ por requisição
-// Se ValidaUsuario.php já cuida disso, pode remover daqui, ou usar a verificação.
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-// Inclua ValidaUsuario.php para ter acesso às funções de validação
-// É crucial que este arquivo contenha a lógica de segurança e as funções como 'verificarAcessoADM()'
 require_once '../../BACK-END/ADM/ValidaUsuario.php';
 
-
-
-
-// Se o código chegou aqui, significa que o usuário é um ADM logado.
-// Agora, use as variáveis de sessão que seu processa_login.php realmente define.
 // As variáveis definidas no login eram: $_SESSION['usuario_id'], $_SESSION['usuario_email'], $_SESSION['usuario_role']
 
 // Você estava usando $_SESSION['username'] no HTML, mas o login define $_SESSION['usuario_email']
