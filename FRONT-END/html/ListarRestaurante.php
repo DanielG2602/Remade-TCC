@@ -1,3 +1,15 @@
+<?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+$is_logged_in = isset($_SESSION['usuario_id']);
+$is_admin = ($is_logged_in && isset($_SESSION['usuario_role']) && $_SESSION['usuario_role'] === 'admin');
+$username_display = $is_logged_in ? htmlspecialchars($_SESSION['usuario_email']) : 'Visitante';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -138,7 +150,8 @@
             <a href="#">LIVROS</a>
             <a href="listar_cargos.php">CARGOS</a>
             <a href="#">FUNCIONÁRIOS</a>
-            <a href="listar_restaurantes.php">RESTAURANTES</a> </div>
+            <a href="listar_restaurantes.php">RESTAURANTES</a>
+        </div>
         <div class="user-btn">
             <a href="#">USUÁRIO</a>
         </div>
@@ -155,58 +168,64 @@
                 </form>
             </div>
             <div class="add-button-container">
-                <a href="./FormRestaurante.php">+ INCLUIR RESTAURANTES</a> </div>
+                <a href="./FormRestaurante.php">+ INCLUIR RESTAURANTES</a>
+            </div>
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>ID</th> <th>NOME DO RESTAURANTE</th>
-                    <th>GERENTE</th>
-                    <th>MENU</th>
-                    <th>AÇÕES</th> </tr>
+                    <th>NOME DO RESTAURANTE</th>
+                    <th>CONTATO</th>
+                    <th>TELEFONE</th>
+                    <th>AÇÕES</th>
+                </tr>
             </thead>
             <tbody>
                 <?php
+                // Inclui o arquivo de conexão com o banco de dados
+                require_once '../../BACK-END/conexao.php'; // Ajuste o caminho se necessário
 
-                $restaurantes = [
-                    ['id' => 1, 'nome' => 'Sabor Divino', 'gerente' => 'Ana Paula', 'menu' => 'Brasileira'],
-                    ['id' => 2, 'nome' => 'Pizzaria Napolitana', 'gerente' => 'Roberto Carlos', 'menu' => 'Italiana'],
-                    ['id' => 3, 'nome' => 'Sushi Master', 'gerente' => 'Takashi Sato', 'menu' => 'Japonesa'],
-                    ['id' => 4, 'nome' => 'O Burger King', 'gerente' => 'João Silva', 'menu' => 'Fast Food'],
-                ];
-
-                $termo_pesquisa = $_GET['pesquisa'] ?? '';
                 $restaurantes_filtrados = [];
+                $termo_pesquisa = $_GET['pesquisa'] ?? '';
 
-                if ($termo_pesquisa) {
-                    foreach ($restaurantes as $restaurante) {
-                        if (stripos($restaurante['nome'], $termo_pesquisa) !== false ||
-                            stripos($restaurante['gerente'], $termo_pesquisa) !== false ||
-                            stripos($restaurante['menu'], $termo_pesquisa) !== false) {
-                            $restaurantes_filtrados[] = $restaurante;
-                        }
+                try {
+                    $pdo = conn(); // Chama a função de conexão definida no arquivo conexao.php
+                    // Seleciona idRestaurante (necessário para as ações), nome, contato, telefone
+                    $sql = "SELECT idRestaurante, nome, contato, telefone FROM restaurante";
+                    $params = [];
+
+                    if ($termo_pesquisa) {
+                        $sql .= " WHERE nome LIKE ? OR contato LIKE ? OR telefone LIKE ?";
+                        $params = ["%$termo_pesquisa%", "%$termo_pesquisa%", "%$termo_pesquisa%"];
                     }
-                } else {
-                    $restaurantes_filtrados = $restaurantes;
+
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute($params);
+                    $restaurantes_filtrados = $stmt->fetchAll();
+
+                } catch (PDOException $e) {
+                    // O colspan foi ajustado para 4, já que o ID não é mais visível
+                    echo "<tr><td colspan='4' style='text-align: center; color: red;'>Erro ao buscar dados do banco de dados: " . $e->getMessage() . "</td></tr>";
                 }
 
                 if (!empty($restaurantes_filtrados)) {
                     foreach ($restaurantes_filtrados as $restaurante) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($restaurante['id']) . "</td>";
+                        // Removido echo "<td>" . htmlspecialchars($restaurante['idRestaurante']) . "</td>";
                         echo "<td>" . htmlspecialchars($restaurante['nome']) . "</td>";
-                        echo "<td>" . htmlspecialchars($restaurante['gerente']) . "</td>";
-                        echo "<td>" . htmlspecialchars($restaurante['menu']) . "</td>";
+                        echo "<td>" . htmlspecialchars($restaurante['contato']) . "</td>";
+                        echo "<td>" . htmlspecialchars($restaurante['telefone']) . "</td>";
                         echo "<td class='action-links'>";
-                        echo "<a href='../../BACK-END/atualizarRestaurante.php?id=" . htmlspecialchars($restaurante['id']) . "' class='edit'>Editar</a>";
-
-                        echo "<a href='../../BACK-END/excluirRestaurante.php?id=" . htmlspecialchars($restaurante['id']) . "' class='delete' onclick=\"return confirm('Tem certeza que deseja excluir este restaurante?');\">Excluir</a>";
+                        // Os links de Editar e Excluir continuam usando 'idRestaurante'
+                        echo "<a href='../../BACK-END/atualizarRestaurante.php?id=" . htmlspecialchars($restaurante['idRestaurante']) . "' class='edit'>Editar</a>";
+                        echo "<a href='../../BACK-END/excluirRestaurante.php?id=" . htmlspecialchars($restaurante['idRestaurante']) . "' class='delete' onclick=\"return confirm('Tem certeza que deseja excluir este restaurante?');\">Excluir</a>";
                         echo "</td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='5' style='text-align: center;'>Nenhum restaurante encontrado.</td></tr>";
+                    // Colspan ajustado para 4, pois há 4 colunas visíveis agora
+                    echo "<tr><td colspan='4' style='text-align: center;'>Nenhum restaurante encontrado.</td></tr>";
                 }
                 ?>
             </tbody>

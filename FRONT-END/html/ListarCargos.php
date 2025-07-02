@@ -1,10 +1,25 @@
 <?php
 include_once __DIR__ . '/../../BACK-END/conexao.php';
+
 // Include desnecessário aqui se a pesquisa é via AJAX:
 // include_once '../../BACK-END/PesquisarCargo.php'; 
 
 // Criar a conexão
 $conn = conn();
+
+include_once '../../BACK-END/PesquisarCargo.php'; 
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Variáveis para controlar o que será exibido
+$is_logged_in = isset($_SESSION['usuario_id']);
+$is_admin = ($is_logged_in && isset($_SESSION['usuario_role']) && $_SESSION['usuario_role'] === 'admin');
+$username_display = $is_logged_in ? htmlspecialchars($_SESSION['usuario_email']) : 'Visitante';
+
+$conn = conn(); // Chama a função que retorna o objeto PDO
+
 
 // Preparar e executar a consulta
 $sql = "SELECT idCargo, nomeCargo, descricao, ind_ativo FROM Cargo";
