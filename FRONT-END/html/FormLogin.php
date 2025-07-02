@@ -50,12 +50,7 @@ if (isset($_SESSION['usuario_id'])) {
                 <div class="botoes">
                     <button type="button" class="esqueceu-senha"><a href="./FormInformeEmail.php">Esqueceu sua Senha?</a> </button>
                     <button type="submit" class="conectar">Conecta-se</button>
-
-                    <div class="nao-tem-conta"> <p>Não tem uma conta?</p>
-                    </div>
-                    <button type="button" class="criar-conta-button"><a href="./formCadastroUsuario.php">Criar conta</a></button>
                 </div>
-
             </form>
         </div>
     </main>
