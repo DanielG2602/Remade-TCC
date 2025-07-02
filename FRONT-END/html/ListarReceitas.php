@@ -2,6 +2,15 @@
 
 include_once __DIR__ . '/../../BACK-END/conexao.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Variáveis para controlar o que será exibido
+$is_logged_in = isset($_SESSION['usuario_id']);
+$is_admin = ($is_logged_in && isset($_SESSION['usuario_role']) && $_SESSION['usuario_role'] === 'admin');
+$username_display = $is_logged_in ? htmlspecialchars($_SESSION['usuario_email']) : 'Visitante';
+
 $conn = conn();
 
 $sql = "SELECT idReceita, nomeReceita, categoria FROM receitanovo";

@@ -1,3 +1,15 @@
+<?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+$is_logged_in = isset($_SESSION['usuario_id']);
+$is_admin = ($is_logged_in && isset($_SESSION['usuario_role']) && $_SESSION['usuario_role'] === 'admin');
+$username_display = $is_logged_in ? htmlspecialchars($_SESSION['usuario_email']) : 'Visitante';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
