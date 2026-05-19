@@ -21,7 +21,7 @@ shell:
 	docker compose exec php bash
 
 db:
-	docker compose exec mysql -u acervo -pacervo123 acervo_rct
+	docker compose exec mysql mysql -u acervo -pacervo123 acervo_rct
 	
 ps:
 	docker compose ps

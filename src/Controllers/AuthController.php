@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Middleware\AuthMiddleware;
 use App\Models\FuncionarioModel;
 
 class AuthController extends Controller {
@@ -18,19 +19,21 @@ class AuthController extends Controller {
 
     public function login() : void {
 
+        
         $email = $this->input('email', '');
         $senha = $this->input('senha', '');
-
+        
         $model = new FuncionarioModel();
         $usuario = $model->findByEmail($email);
+        
 
         if(!$usuario || !password_verify($senha, $usuario['senha'])){
-            $this->view('auth/login', ['error' => 'Email ou senha invalidos']);
+            $this->view('auth/login', ['erro' => 'Email ou senha invalidos']);
             return;
         }
 
         if(!$usuario['ativo']){
-            $this->view('auth/login', ['error' => 'Usuario inativo']);
+            $this->view('auth/login', ['erro' => 'Usuario inativo']);
             return;
         }
 
@@ -43,7 +46,6 @@ class AuthController extends Controller {
         ];
 
         $this->redirect('/');
-
     }
 
     public function logout() : void {
@@ -52,11 +54,11 @@ class AuthController extends Controller {
     }
 
     public function dashboard() : void {
-        if(!isset($_SESSION['usuario'])){
-            $this->redirect('/login');
-        }
+
+        AuthMiddleware::handle();
 
         $this->view('dashboard');
+
     }
 
 }
