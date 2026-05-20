@@ -10,7 +10,7 @@ class CargoModel extends Model{
 
     public function allAtivos () : array {
 
-        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE ativo = 1 ORDER BY nome");
+         $stmt = $this->db->query("SELECT * FROM {$this->table} WHERE ativo = 1 ORDER BY nome");
         return $stmt->fetchAll();
 
     }

@@ -7,6 +7,14 @@ namespace App\Models;
 class FuncionarioModel extends Model{
     protected string $table = 'funcionario';
 
+    public function allComCargo () : array {
+        $stmt = $this->db->query("
+            SELECT f.*, c.nome AS nome_cargo FROM funcionario f LEFT JOIN cargo c ON c.id = f.cargo_id ORDER BY f.nome
+        ");
+
+        return $stmt->fetchAll();
+    }
+
     public function findByEmail(string $email) : array|false{
         $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE email = ? LIMIT 1");
         $stmt->execute([$email]);
