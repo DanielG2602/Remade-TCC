@@ -40,9 +40,9 @@ class AuthController extends Controller {
         session_regenerate_id(true);
 
         $_SESSION['usuario'] = [
-            'id' => $usuario['id'],
-            'nome' => $usuario['nome'],
-            'role' => $usuario['role'],
+            'id'    => $usuario['id'],
+            'nome'  => $usuario['nome'],
+            'role'  => $usuario['role'],
         ];
 
         $this->redirect('/');
