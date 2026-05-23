@@ -185,3 +185,15 @@ INSERT INTO funcionario (nome, email, senha, role, cargo_id, dt_admissao) VALUES
     1,
     CURDATE()
 );
+
+INSERT INTO medida (descricao) VALUES
+    ('grama'),
+    ('kg'),
+    ('ml'),
+    ('litro'),
+    ('colher de chá'),
+    ('colher de sopa'),
+    ('xícara'),
+    ('unidade'),
+    ('pitada'),
+    ('a gosto');
