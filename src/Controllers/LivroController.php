@@ -45,9 +45,9 @@ class LivroController extends Controller {
         AuthMiddleware::handle();
 
         $data = [
-            'nome' => trim($this->input('nome', '')),
-            'editora' => trim($this->input('editora', '')),
-            'autor' => trim($this->input('autor', '')),
+            'nome'      => trim($this->input('nome', '')),
+            'editora'   => trim($this->input('editora', '')),
+            'autor'     => trim($this->input('autor', '')),
         ];
 
         if(empty($data)){

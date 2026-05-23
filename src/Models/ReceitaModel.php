@@ -116,6 +116,26 @@ class ReceitaModel extends Model {
             VALUES (:receita_id, :ingrediente_id, :quantidade, :medida_id)
         ");
 
+        foreach ($ingredientes as $ing) {
+            if (empty($ing['ingrediente_id'])) {
+                continue;
+            }
+ 
+            $stmt->execute([
+                ':receita_id'     => $receitaId,
+                ':ingrediente_id' => $ing['ingrediente_id'],
+                ':quantidade'     => $ing['quantidade'] ?? 0,
+                ':medida_id'      => $ing['medida_id'] ?: null,
+            ]);
+        }
+    }
+
+    public function updateFoto (int $id, string $foto) : bool {
+        $stmt = $this->db->prepare("
+            UPDATE {$this->table} SET foto = ? WHERE id = ?
+        ");
+
+        return $stmt->execute([$foto, $id]);
     }
 
 }
