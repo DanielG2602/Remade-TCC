@@ -6,14 +6,15 @@ namespace App\Controllers;
 
 use App\Middleware\AuthMiddleware;
 use App\Models\CargoModel;
+use App\Models\CategoriaModel;
 use PDOException;
 
 class CategoriaController extends Controller{
-    private CargoModel $model;
+    private CategoriaModel $model;
 
     public function __construct()
     {
-        $this->model = new CargoModel();
+        $this->model = new CategoriaModel();
     }
 
     public function index () : void {

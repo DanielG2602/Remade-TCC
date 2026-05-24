@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 class DegustacaoModel extends Model {
-    protected string $table = 'desgustacao';
+    protected string $table = 'degustacao';
 
     public function allCompleto() : array {
         $stmt = $this->db->query("
@@ -28,7 +28,7 @@ class DegustacaoModel extends Model {
 
         return $stmt->execute([
             ':nota'             => $data['nota'],
-            ':data'             => $data['nota'],
+            ':data'             => $data['data'],
             ':receita_id'       => $data['receita_id'],
             ':degustador_id'    => $data['degustador_id'],
         ]);
@@ -43,10 +43,10 @@ class DegustacaoModel extends Model {
 
         return $stmt->execute([
             ':nota'             => $data['nota'],
-            ':data'             => $data['nota'],
+            ':data'             => $data['data'],
             ':receita_id'       => $data['receita_id'],
             ':degustador_id'    => $data['degustador_id'],
-            'id'                => $id,
+            ':id'                => $id,
         ]);
     }
 }

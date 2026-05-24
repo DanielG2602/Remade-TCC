@@ -42,7 +42,7 @@ class ReceitaController extends Controller{
         $ingredientes   = $this->model->findIngredientes((int) $id);
 
         if(!$receita) {
-            $this->redirect('receitas');
+            $this->redirect('/receitas');
         }
 
         $this->view('receitas/show', [
@@ -73,7 +73,7 @@ class ReceitaController extends Controller{
         try{
             $receitaId = $this->model->create($data);
 
-            if(empty($_FILES['foto']['tmp_name'])){
+            if(!empty($_FILES['foto']['tmp_name'])){
                 $foto = $this->salvarFoto($_FILES['foto'], $receitaId);
                 $this->model->updateFoto($receitaId, $foto);
             }
@@ -90,6 +90,8 @@ class ReceitaController extends Controller{
 
             return;
         }
+
+        $this->redirect('/receitas');
     }
 
     public function edit (string $id) : void {
@@ -151,6 +153,8 @@ class ReceitaController extends Controller{
 
             return;
         }
+
+        $this->redirect('/receitas');
     }
 
     public function destroy (string $id) : void{
@@ -162,10 +166,10 @@ class ReceitaController extends Controller{
 
     private function formData() : array {
         return [
-            'categoria'             => $this->categoriaModel->all(),
-            'ingredientes_lista'    => $this->ingredienteModel->all(),
-            'funcionarios'          => $this->funcionarioModel->allComCargo(),
-            'medida'                => $this->medidaModel->all(),
+            'categorias'             => $this->categoriaModel->all(),
+            'ingredientes_lista'     => $this->ingredienteModel->all(),
+            'funcionarios'           => $this->funcionarioModel->allComCargo(),
+            'medidas'                => $this->medidaModel->all(),
         ];
     }
 
@@ -182,18 +186,18 @@ class ReceitaController extends Controller{
     }
 
     private function collectIngredientes () : array {
-        $ids = $_POST['ingredientes_id'] ?? [];
+        $ids        = $_POST['ingrediente_id'] ?? [];
         $quantidade = $_POST['quantidade'];
-        $medidas = $_POST['medida_id'];
+        $medidas    = $_POST['medida_id'];
 
         $result = [];
 
         foreach($ids as $i => $ingId) {
             if(empty($ingId)) continue;
             $result[] = [
-                'ingredientes_id' => $ingId,
-                'quantidade' => $quantidade[$i] ?? 0,
-                'medida_id' => $medidas[$i] ?? null,
+                'ingrediente_id'    => $ingId,
+                'quantidade'        => $quantidade[$i] ?? 0,
+                'medida_id'         => $medidas[$i] ?? null,
             ];
         }
 
@@ -209,7 +213,7 @@ class ReceitaController extends Controller{
     }
 
     private function salvarFoto(array $file, int $receitaId) : ?string {
-        $ext = pathinfo($file['nome'], PATHINFO_EXTENSION);
+        $ext  = pathinfo($file['name'], PATHINFO_EXTENSION);
         $nome = "receita_{$receitaId}_" . time() . ".{$ext}";
         $dest = '/var/www/storage/uploads/' . $nome;
 

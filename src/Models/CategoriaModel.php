@@ -17,7 +17,7 @@ class CategoriaModel extends Model {
 
     }
 
-    public function update (string $id, array $data) : bool {
+    public function update (int $id, array $data) : bool {
         $stmt = $this->db->prepare("
             UPDATE {$this->table} SET nome = :nome WHERE id = :id
         ");

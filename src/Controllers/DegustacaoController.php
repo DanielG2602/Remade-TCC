@@ -24,9 +24,9 @@ class DegustacaoController extends Controller {
     public function index () : void {
         AuthMiddleware::handle();
 
-        $desguntacao = $this->model->allCompleto();
+        $degustacoes = $this->model->allCompleto();
 
-        $this->view('degustacoes/index', ['descricao' => $desguntacao]);
+        $this->view('degustacoes/index', ['degustacoes' => $degustacoes]);
     }
 
     public function create () : void {
@@ -41,7 +41,7 @@ class DegustacaoController extends Controller {
         $data = $this->colletFormData();
         $erro = $this->validar($data);
 
-        if(!$erro){
+        if($erro){
             $this->view('degustacoes/form', array_merge($this->formData(), ['erro' => $erro, 'data' => $data]));
             return;
         }
@@ -59,7 +59,7 @@ class DegustacaoController extends Controller {
             $this->redirect('/degustacoes');
         }
 
-        $this->view('degustacoes/form', array_merge($this->formData(), ['desgustacao' => $degustacao]));
+        $this->view('degustacoes/form', array_merge($this->formData(), ['degustacao' => $degustacao]));
     }
 
     public function update (string $id) : void {
@@ -68,7 +68,7 @@ class DegustacaoController extends Controller {
         $data = $this->colletFormData();
         $erro = $this->validar($data);
 
-        if(!$erro) {
+        if($erro) {
             $degustacao = $this->model->find((int) $id);
             $this->view('degustacoes/form', array_merge($this->formData(), ['erro'=> $erro, 'desgustacao' => $degustacao]));
             return;
@@ -97,7 +97,7 @@ class DegustacaoController extends Controller {
     private function formData () : array {
         return [
             'receitas'      => $this->receitaModel->all(),
-            'funcionario'   => $this->funcionarioModel->all(),
+            'funcionarios'   => $this->funcionarioModel->allComCargo(),
         ];
     }
 
